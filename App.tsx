@@ -1,10 +1,10 @@
 import { StyleSheet, View } from "react-native";
-import AddExpenses from "./src/screens/AddExpenses";
+import AddExpenseForm from "./src/screens/AddExpenseForm";
 
 export default function App() {
     return (
         <View style={styles.container}>
-            <AddExpenses />
+            <AddExpenseForm />
         </View>
     );
 }
