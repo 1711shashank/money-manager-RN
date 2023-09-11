@@ -26,7 +26,7 @@ const AddExpenseForm = () => {
 	};
 
 	const handleSubmit = () => {
-		console.log(amount, message, date, expensesCategory);
+		console.log(amount, message, moment(date).format('DD MMM YY'), expensesCategory);
 	}
 
 	return (
