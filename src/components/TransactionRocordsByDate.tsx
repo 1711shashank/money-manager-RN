@@ -12,7 +12,7 @@ const ExpenseItem = ({ item }: { item: { message: string; amount: number, expens
                 </View>
                 <View style={{ width: '60%' }}>
                     <Text style={{ fontSize: 16, color: 'white' }} numberOfLines={1} ellipsizeMode="tail" >{item.message}</Text>
-                    <Text style={{ fontSize: 14, color: 'gray' }} numberOfLines={1} ellipsizeMode="tail" >{item.expensesCategory}</Text>
+                    <Text style={{ fontSize: 14, color: 'gray' }} >{item.expensesCategory}</Text>
                 </View>
             </View>
             <Text style={{ fontSize: 18, color: 'white' }}>{item.amount}</Text>
@@ -22,7 +22,7 @@ const ExpenseItem = ({ item }: { item: { message: string; amount: number, expens
 
 const TransactionRocordsByDate = ({ date, data }: { date: string; data: { message: string; amount: number, expensesCategory: string }[] }) => {
     return (
-        <View style={{}}>
+        <View style={{ paddingHorizontal: 10 }}>
             <Text style={{ color: 'white', paddingLeft: 10, paddingTop: 30, paddingBottom: 8 }}>{moment(date).format('DD MMM YYYY')}</Text>
             {data.map((item, index) => (
                 <ExpenseItem key={index} item={item} />
