@@ -19,7 +19,6 @@ const Home: React.FC = () => (
 const styles = StyleSheet.create({
     homeScreen: {
         width: '100%',
-        padding: 10,
         marginTop:30,
     },
 });

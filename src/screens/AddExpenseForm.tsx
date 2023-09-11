@@ -126,12 +126,12 @@ const styles = StyleSheet.create({
 		fontSize: 15,
 		backgroundColor: "transparent",
 		borderWidth: 1,
-		borderColor: "#00A884",
+		borderColor: "#846EFD",
 		borderRadius: 20,
 		color: "red",
 	},
 	expensesCategorySelected: {
-		backgroundColor: "#00A884",
+		backgroundColor: "#846EFD",
 		borderRadius: 20,
 	},
 	categoryText: {
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
 		padding: 16,
 		color: 'white',
 		borderRadius: 100,
-		backgroundColor: '#00A884',
+		backgroundColor: '#846EFD',
 		textAlign: 'center',
 	},
 	disabledsubmitButton: {
