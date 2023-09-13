@@ -7,12 +7,28 @@ export const expensesDataArray = [
                 message: 'Lunch with friends',
                 expensesCategory: 'Food',
                 budgetCategory: 'want',
+                transactionCategory: 'Expenses'
             },
             {
                 amount: 500,
                 message: 'Movie tickets',
                 expensesCategory: 'Entertainment',
                 budgetCategory: 'want',
+                transactionCategory: 'Expenses'
+            },
+            {
+                amount: 50,
+                message: 'Lunch with friends',
+                expensesCategory: 'Food',
+                budgetCategory: 'want',
+                transactionCategory: 'Expenses'
+            },
+            {
+                amount: 500,
+                message: 'Movie tickets',
+                expensesCategory: 'Entertainment',
+                budgetCategory: 'want',
+                transactionCategory: 'Expenses'
             },
         ],
     },
@@ -24,18 +40,42 @@ export const expensesDataArray = [
                 message: 'Another expense for this date Another expense for this date',
                 expensesCategory: 'Entertainment',
                 budgetCategory: 'want',
+                transactionCategory: 'Expenses'
             },
             {
-                amount: 100000,
-                message: 'Another',
-                expensesCategory: 'Entertainment',
+                amount: 50000,
+                message: 'Salary',
+                expensesCategory: 'Salary',
                 budgetCategory: 'want',
+                transactionCategory: 'Income'
             },
             {
                 amount: 30,
                 message: 'Another expense for this date',
                 expensesCategory: 'Entertainment',
                 budgetCategory: 'want',
+                transactionCategory: 'Expenses'
+            },
+            {
+                amount: 30,
+                message: 'Another expense for this date Another expense for this date',
+                expensesCategory: 'Entertainment',
+                budgetCategory: 'want',
+                transactionCategory: 'Expenses'
+            },
+            {
+                amount: 50000,
+                message: 'Salary',
+                expensesCategory: 'Salary',
+                budgetCategory: 'want',
+                transactionCategory: 'Income'
+            },
+            {
+                amount: 30,
+                message: 'Another expense for this date',
+                expensesCategory: 'Entertainment',
+                budgetCategory: 'want',
+                transactionCategory: 'Expenses'
             },
         ],
     },

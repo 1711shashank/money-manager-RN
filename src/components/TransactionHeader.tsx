@@ -1,11 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { calculateTotalExpenses, calculateTotalIncome, formatAmount } from '../utility/helperFunction';
+import { expensesDataArray } from '../utility/dummyData';
+
+const TransactionHeader= () => {
+
+    const totalExpenses = calculateTotalExpenses();
+    const totalIncome = calculateTotalIncome();
 
 
-const TransactionHeader = () => {
-
-    const totalAmount = 50000;
-    const formatedTotalAmount = totalAmount.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 });
+    const formatedTotalIncome = formatAmount(totalIncome);
+    const formatedTotalExpenses = formatAmount(totalExpenses);
+    const formatedRemaining = formatAmount(totalIncome - totalExpenses);
 
     return (
         <>
@@ -17,25 +24,22 @@ const TransactionHeader = () => {
             </View>
 
             <View style={styles.summaryCard}>
-
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                     <View style={[styles.transactionItem, { borderRightWidth: 1, borderColor: 'gray' }]}>
-                        <Text style={styles.amountText}> {formatedTotalAmount} </Text>
+                        <Text style={styles.amountText}> {formatedTotalExpenses} </Text>
                         <Text style={styles.amountLabel}> Expenses</Text>
                     </View>
                     <View style={styles.transactionItem}>
-                        <Text style={styles.amountText}> {formatedTotalAmount} </Text>
+                        <Text style={styles.amountText}> {formatedRemaining} </Text>
                         <Text style={styles.amountLabel}> Remaining</Text>
                     </View>
                 </View>
 
-                <Text style={styles.monthlyBudgetText}> Monthly Budget:{formatedTotalAmount}</Text>
+                <Text style={styles.monthlyBudgetText}> Monthly Budget:{formatedTotalIncome}</Text>
             </View>
-
         </>
-    )
-}
-
+    );
+};
 
 const styles = StyleSheet.create({
     header: {
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
         color: 'lightgray',
         paddingTop: 20,
         textAlign: 'center',
-    }
+    },
 });
 
 export default TransactionHeader;

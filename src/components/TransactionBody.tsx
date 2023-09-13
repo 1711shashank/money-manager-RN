@@ -1,11 +1,12 @@
-import { expensesDataArray } from '../utility/dummyData';
 import TransactionRocordsByDate from './TransactionRocordsByDate';
 import moment from 'moment';
+import { expensesDataArray } from './../utility/dummyData';
 
 
 const TransactionBody = () => {
     return (
         <>
+
             {
                 expensesDataArray.map((expensesData, index) => (
                     <TransactionRocordsByDate
