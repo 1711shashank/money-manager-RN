@@ -4,6 +4,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { Text, View, TextInput, StyleSheet, TouchableOpacity, Platform } from "react-native";
 
 const expensesCategoryArray: string[] = ["Need", "Want", "Invest"];
+const transactionCategoryArray: string[] = ["Expenses", "Income"];
 
 
 const AddExpenseForm = () => {
@@ -12,6 +13,7 @@ const AddExpenseForm = () => {
 	const [date, setDate] = useState<Date>(new Date());
 	const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
 	const [expensesCategory, setExpensesCategory] = useState<string>("Need");
+	const [transactionCategory, setTransactionCategory] = useState<string>("Expenses");
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
 
@@ -26,12 +28,28 @@ const AddExpenseForm = () => {
 	};
 
 	const handleSubmit = () => {
-		console.log(amount, message, moment(date).format('DD MMM YY'), expensesCategory);
+		if (transactionCategory === "Expenses")
+			console.log(transactionCategory, amount, message, moment(date).format('DD MMM YYYY'), expensesCategory);
+		else
+			console.log(transactionCategory, amount, message, moment(date).format('DD MMM YYYY'));
+
 	}
 
 	return (
 		<>
 			<View style={styles.container}>
+
+				<View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-evenly" }}>
+					{transactionCategoryArray.map((currItem, index) => (
+						<TouchableOpacity
+							key={index}
+							onPress={() => setTransactionCategory(currItem)}
+							style={[styles.transactionCategorys, transactionCategory === currItem && styles.transactionCategorySelected]}
+						>
+							<Text style={styles.categoryText}>{currItem}</Text>
+						</TouchableOpacity>
+					))}
+				</View>
 
 				<View style={styles.inputContainer}>
 					<Text style={styles.label}>Amount</Text>
@@ -51,7 +69,7 @@ const AddExpenseForm = () => {
 				</View>
 
 				<View style={styles.inputContainer}>
-
+					<Text style={styles.label}>Date</Text>
 					<TextInput
 						style={styles.input}
 						value={moment(date).format('DD MMM YYYY')}
@@ -73,17 +91,21 @@ const AddExpenseForm = () => {
 					)}
 				</View>
 
-				<View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-evenly" }}>
-					{expensesCategoryArray.map((currCategoryItem, index) => (
-						<TouchableOpacity
-							key={index}
-							onPress={() => setExpensesCategory(currCategoryItem)}
-							style={[styles.expensesCategorys, expensesCategory === currCategoryItem && styles.expensesCategorySelected]}
-						>
-							<Text style={styles.categoryText}>{currCategoryItem}</Text>
-						</TouchableOpacity>
-					))}
-				</View>
+				{
+					transactionCategory === "Expenses"
+					&&
+					<View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-evenly" }}>
+						{expensesCategoryArray.map((currItem, index) => (
+							<TouchableOpacity
+								key={index}
+								onPress={() => setExpensesCategory(currItem)}
+								style={[styles.expensesCategorys, expensesCategory === currItem && styles.expensesCategorySelected]}
+							>
+								<Text style={styles.categoryText}>{currItem}</Text>
+							</TouchableOpacity>
+						))}
+					</View>
+				}
 
 				<TouchableOpacity style={{ flex: 1 }} disabled={isDisabled} onPress={handleSubmit} >
 					<Text style={[styles.submitButton, isDisabled && styles.disabledsubmitButton]}>Submit</Text>
@@ -129,8 +151,26 @@ const styles = StyleSheet.create({
 		borderColor: "#846EFD",
 		borderRadius: 20,
 		color: "red",
+		marginBottom: 20
 	},
 	expensesCategorySelected: {
+		backgroundColor: "#846EFD",
+		borderRadius: 20,
+	},
+	transactionCategorys: {
+		width: "45%",
+		paddingHorizontal: 25,
+		paddingVertical: 5,
+		margin: 5,
+		fontSize: 15,
+		backgroundColor: "transparent",
+		borderWidth: 1,
+		borderColor: "#846EFD",
+		borderRadius: 20,
+		color: "red",
+		marginBottom: 20
+	},
+	transactionCategorySelected: {
 		backgroundColor: "#846EFD",
 		borderRadius: 20,
 	},
