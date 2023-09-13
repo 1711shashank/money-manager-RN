@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, SectionList, StatusBar } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, SectionList, StatusBar, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 import TransactionRocordsByDate from './TransactionRocordsByDate'
-import { expensesDataArray } from '../utility/dummyData';
+
 
 type TransactionItemProps = {
     amount: number;
@@ -11,21 +11,22 @@ type TransactionItemProps = {
     transactionCategory: string;
 };
 
-type ExpensesDataProps = {
+type TransactionDataProps = {
     date: Date;
     data: TransactionItemProps[];
 };
 
 type SectionDataProps = {
-    title: string; // Change this to accept a Date or string
+    title: string;
     data: TransactionItemProps[];
 };
 
 
-const TransactionBody: React.FC = () => {
-    const data: SectionDataProps[] = expensesDataArray.map((expensesData: ExpensesDataProps) => ({
-        title: moment(expensesData.date).format('DD MMM YYYY'), // Convert date to string
-        data: expensesData.data,
+const TransactionBody = ({ transactionData }: any) => {
+
+    const data: SectionDataProps[] = transactionData.map((item: TransactionDataProps) => ({
+        title: moment(item.date).format('DD MMM YYYY'),
+        data: item.data,
     }));
 
     return (
@@ -49,7 +50,7 @@ const TransactionBody: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginHorizontal:15
+        marginHorizontal: 15
     },
     icons: {
         backgroundColor: '#242424',

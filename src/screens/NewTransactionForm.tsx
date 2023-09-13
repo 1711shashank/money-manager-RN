@@ -7,12 +7,12 @@ const expensesCategoryArray: string[] = ["Need", "Want", "Invest"];
 const transactionCategoryArray: string[] = ["Expenses", "Income"];
 
 
-const AddExpenseForm = () => {
+const NewTransactionForm = ({ transactionData, setTransactionData, setShowTransactionForm }: any) => {
 	const [amount, setAmount] = useState<number>(0);
 	const [message, setMessage] = useState<string>('');
 	const [date, setDate] = useState<Date>(new Date());
 	const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
-	const [expensesCategory, setExpensesCategory] = useState<string>("Need");
+	const [budgetCategory, setBudgetCategory] = useState<string>("Need");
 	const [transactionCategory, setTransactionCategory] = useState<string>("Expenses");
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
@@ -28,12 +28,28 @@ const AddExpenseForm = () => {
 	};
 
 	const handleSubmit = () => {
-		if (transactionCategory === "Expenses")
-			console.log(transactionCategory, amount, message, moment(date).format('DD MMM YYYY'), expensesCategory);
-		else
-			console.log(transactionCategory, amount, message, moment(date).format('DD MMM YYYY'));
 
-	}
+		const formattedDate = moment(date).format('DD MMM YYYY');
+		const newData = {
+			amount,
+			message,
+			expensesCategory: "test", // You can replace this with the actual value if needed
+			transactionCategory,
+			budgetCategory: transactionCategory === 'Expenses' ? budgetCategory : null,
+		};
+
+		const dateIndex = transactionData.findIndex((item: any) => item.date === formattedDate);
+
+		if (dateIndex !== -1) {
+			transactionData[dateIndex].data.push(newData);
+		} else {
+			transactionData.push({ date: formattedDate, data: [newData] });
+		}
+
+		setTransactionData([...transactionData]); // Make sure to create a new array reference
+		setShowTransactionForm(false);
+
+	};
 
 	return (
 		<>
@@ -98,8 +114,8 @@ const AddExpenseForm = () => {
 						{expensesCategoryArray.map((currItem, index) => (
 							<TouchableOpacity
 								key={index}
-								onPress={() => setExpensesCategory(currItem)}
-								style={[styles.expensesCategorys, expensesCategory === currItem && styles.expensesCategorySelected]}
+								onPress={() => setBudgetCategory(currItem)}
+								style={[styles.expensesCategorys, budgetCategory === currItem && styles.expensesCategorySelected]}
 							>
 								<Text style={styles.categoryText}>{currItem}</Text>
 							</TouchableOpacity>
@@ -122,13 +138,14 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		margin: 5,
 		marginTop: 100,
+		marginHorizontal: 45
 	},
 	inputContainer: {
 		margin: 5,
 		marginBottom: 15
 	},
 	label: {
-		color: "lightgray",
+		color: "lightgrey",
 		marginLeft: 10,
 	},
 	input: {
@@ -138,12 +155,12 @@ const styles = StyleSheet.create({
 		color: "lightgray",
 		borderWidth: 0,
 		borderBottomWidth: 2,
-		borderBottomColor: "#A9A9A9",
+		borderBottomColor: "lightgray",
 	},
 	expensesCategorys: {
 		width: "28%",
 		paddingHorizontal: 25,
-		paddingVertical: 5,
+		paddingVertical: 7,
 		margin: 5,
 		fontSize: 15,
 		backgroundColor: "transparent",
@@ -160,7 +177,7 @@ const styles = StyleSheet.create({
 	transactionCategorys: {
 		width: "45%",
 		paddingHorizontal: 25,
-		paddingVertical: 5,
+		paddingVertical: 7,
 		margin: 5,
 		fontSize: 15,
 		backgroundColor: "transparent",
@@ -193,4 +210,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default AddExpenseForm;
+export default NewTransactionForm;
