@@ -1,14 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { calculateTotalExpenses, calculateTotalIncome, formatAmount } from '../utility/helperFunction';
-import { expensesDataArray } from '../utility/dummyData';
 
-const TransactionHeader= () => {
+const TransactionHeader = () => {
 
     const totalExpenses = calculateTotalExpenses();
     const totalIncome = calculateTotalIncome();
-
 
     const formatedTotalIncome = formatAmount(totalIncome);
     const formatedTotalExpenses = formatAmount(totalExpenses);
@@ -43,9 +41,11 @@ const TransactionHeader= () => {
 
 const styles = StyleSheet.create({
     header: {
-        width: '100%',
         backgroundColor: '#2c2c2c',
+        paddingHorizontal:15,
         paddingTop: 30,
+        // marginTop: StatusBar.currentHeight || 0
+
     },
     headerContent: {
         flexDirection: 'row',
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 10,
         paddingVertical: 15,
+        marginHorizontal:20
     },
     transactionItem: {
         flex: 1,
