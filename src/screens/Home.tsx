@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Pressable, View } from 'react-native';
+import TransactionFormModal from './TransactionFormModal';
 import { AntDesign } from '@expo/vector-icons';
-import NewTransactionForm from './NewTransactionForm';
 import TransactionScreen from './TransactionScreen';
 
-const Home: React.FC = () => {
-    
+const Home = () => {
     const [transactionData, setTransactionData] = useState<any[]>([]);
-    const [showTransactionForm, setShowTransactionForm] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
 
     const fetchData = async () => {
         try {
@@ -27,41 +26,41 @@ const Home: React.FC = () => {
     }, [])
 
 
-    const handleClick = () => {
-        console.log(showTransactionForm);
-        setShowTransactionForm(true);
-    }
-
     return (
-        <View>
-            {showTransactionForm ? (
-                <NewTransactionForm
-                    transactionData={transactionData}
-                    setTransactionData={setTransactionData}
-                    setShowTransactionForm={setShowTransactionForm}
-                />
-            ) : (
-                <>
-                    <TransactionScreen transactionData={transactionData} />
-                    <View>
-                        <TouchableOpacity onPress={() => handleClick()}>
-                            <AntDesign name="pluscircle" size={55} color="#846EFD" style={styles.addIcon} />
-                        </TouchableOpacity>
-                    </View>
-                </>
-            )}
-        </View>
+        <>
+            <View style={styles.homeScreen}>
+
+                <TransactionScreen transactionData={transactionData} />
+
+                <Pressable onPress={() => setModalVisible(true)} style={styles.addIconContainer}>
+                    <AntDesign name="pluscircle" size={60} color="#846EFD" style={styles.addIcon} />
+                </Pressable>
+                
+            </View>
+
+            <TransactionFormModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+        </>
     );
 };
 
 const styles = StyleSheet.create({
-    addIcon: {
+
+    homeScreen: {
+        width: '100%',
+        height: '100%',
+    },
+    addIconContainer: {
         position: 'absolute',
         bottom: 30,
-        right: 40,
+        right: 30,
         backgroundColor: 'black',
         borderRadius: 100,
     },
+    addIcon: {
+        backgroundColor: 'black',
+        borderRadius: 100,
+    },
+
 });
 
 export default Home;

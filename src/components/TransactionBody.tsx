@@ -25,7 +25,7 @@ type SectionDataProps = {
 const TransactionBody = ({ transactionData }: any) => {
 
     const data: SectionDataProps[] = transactionData.map((item: TransactionDataProps) => ({
-        title: moment(item.date).format('DD MMM YYYY'),
+        title: item.date,
         data: item.data,
     }));
 
@@ -34,6 +34,7 @@ const TransactionBody = ({ transactionData }: any) => {
             <SafeAreaView style={styles.container}>
                 <SectionList
                     sections={data}
+                    scrollEnabled={true}
                     keyExtractor={(item, index) => item.message + index.toString()}
                     renderItem={({ item }) => <TransactionRocordsByDate item={item} />}
                     renderSectionHeader={({ section }) => (

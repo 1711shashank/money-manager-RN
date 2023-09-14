@@ -6,7 +6,7 @@ import TransactionBody from '../components/TransactionBody'
 const TransactionScreen = ({ transactionData }: any) => {
     return (
         <>
-            <View >
+            <View style={{flex:1}}>
                 <TransactionHeader transactionData={transactionData}/>
                 <TransactionBody transactionData={transactionData} />
             </View>
