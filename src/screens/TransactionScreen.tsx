@@ -7,7 +7,7 @@ const TransactionScreen = ({ transactionData }: any) => {
     return (
         <>
             <View >
-                <TransactionHeader />
+                <TransactionHeader transactionData={transactionData}/>
                 <TransactionBody transactionData={transactionData} />
             </View>
         </>

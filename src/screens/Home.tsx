@@ -1,13 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { expensesDataArray } from '../utility/dummyData';
 import { AntDesign } from '@expo/vector-icons';
 import NewTransactionForm from './NewTransactionForm';
 import TransactionScreen from './TransactionScreen';
 
 const Home: React.FC = () => {
-    const [transactionData, setTransactionData] = useState(expensesDataArray);
-    const [showTransactionForm, setShowTransactionForm] = useState(true);
+    
+    const [transactionData, setTransactionData] = useState<any[]>([]);
+    const [showTransactionForm, setShowTransactionForm] = useState(false);
+
+    const fetchData = async () => {
+        try {
+            const response = await fetch('https://moneymanagerserver.onrender.com/getData');
+            const responseData = await response.json();
+            setTransactionData(responseData.data);
+
+            console.log("responseJson", responseData.data);
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, [])
 
 
     const handleClick = () => {

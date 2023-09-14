@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { expensesDataArray } from "./dummyData";
 
 export const formatAmount = (amount: number) => {
@@ -5,14 +6,19 @@ export const formatAmount = (amount: number) => {
     return formatedAmount;
 }
 
-export const calculateTotalExpenses = () => expensesDataArray.reduce((total, item) => {
-    return total + item.data
-        .filter(transaction => transaction.transactionCategory === 'Expenses')
-        .reduce((sum, transaction) => sum + transaction.amount, 0);
-}, 0);
+export const calculateTotalExpenses = (transactionData: any) => {
+    const { totalIncome, totalExpenses } = transactionData.reduce((totals: { totalIncome: number, totalExpenses: number }, entry: any) => {
 
-export const calculateTotalIncome = () => expensesDataArray.reduce((total, item) => {
-    return total + item.data
-        .filter(transaction => transaction.transactionCategory === 'Income')
-        .reduce((sum, transaction) => sum + transaction.amount, 0);
-}, 0);
+        entry.data.forEach((transaction: any) => {
+
+            if (transaction.transactionType === "Income") totals.totalIncome += transaction.amount;
+            else if (transaction.transactionType === "Expenses") totals.totalExpenses += transaction.amount;
+
+        });
+
+        return totals;
+
+    }, { totalIncome: 0, totalExpenses: 0 });
+
+    return { totalIncome, totalExpenses };
+}
