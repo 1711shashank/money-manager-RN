@@ -3,10 +3,15 @@ import { StyleSheet, Pressable, View } from 'react-native';
 import TransactionFormModal from './TransactionFormModal';
 import { AntDesign } from '@expo/vector-icons';
 import TransactionScreen from './TransactionScreen';
+import moment from 'moment';
+import { extractMonthsAndYears } from '../utility/helperFunction';
 
 const Home = () => {
     const [transactionData, setTransactionData] = useState<any[]>([]);
     const [modalVisible, setModalVisible] = useState(false);
+
+    const uniqueMonthsAndYears = extractMonthsAndYears(transactionData);
+
 
     const fetchData = async () => {
         try {
@@ -14,10 +19,10 @@ const Home = () => {
             const responseData = await response.json();
             setTransactionData(responseData.data);
 
-            console.log("responseJson", responseData.data);
+            // console.log("responseJson", responseData.data);
 
         } catch (error) {
-            console.error('Error fetching data:', error);
+            // console.error('Error fetching data:', error);
         }
     };
 
@@ -30,12 +35,12 @@ const Home = () => {
         <>
             <View style={styles.homeScreen}>
 
-                <TransactionScreen transactionData={transactionData} />
+                <TransactionScreen transactionData={transactionData} uniqueMonthsAndYears={uniqueMonthsAndYears}/>
 
                 <Pressable onPress={() => setModalVisible(true)} style={styles.addIconContainer}>
                     <AntDesign name="pluscircle" size={60} color="#846EFD" style={styles.addIcon} />
                 </Pressable>
-                
+
             </View>
 
             <TransactionFormModal modalVisible={modalVisible} setModalVisible={setModalVisible} />

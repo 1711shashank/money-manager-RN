@@ -3,11 +3,11 @@ import { View } from 'react-native'
 import TransactionHeader from '../components/TransactionHeader'
 import TransactionBody from '../components/TransactionBody'
 
-const TransactionScreen = ({ transactionData }: any) => {
+const TransactionScreen = ({ transactionData, uniqueMonthsAndYears }: any) => {
     return (
         <>
             <View style={{flex:1}}>
-                <TransactionHeader transactionData={transactionData}/>
+                <TransactionHeader transactionData={transactionData} uniqueMonthsAndYears={uniqueMonthsAndYears}/>
                 <TransactionBody transactionData={transactionData} />
             </View>
         </>

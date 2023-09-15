@@ -22,3 +22,17 @@ export const calculateTotalExpenses = (transactionData: any) => {
 
     return { totalIncome, totalExpenses };
 }
+
+
+export const extractMonthsAndYears = (dateArray: any[]) => {
+    const uniqueMonthsAndYears: string[] = [];
+    dateArray.filter((entry: any) => {
+        const date = new Date(entry.date);
+        const monthYear = `${date.toLocaleString('en-US', { month: 'short' })} ${date.getFullYear()}`;
+
+        if (!uniqueMonthsAndYears.includes(monthYear)) {
+            uniqueMonthsAndYears.push(monthYear);
+        }
+    });
+    return uniqueMonthsAndYears;
+};

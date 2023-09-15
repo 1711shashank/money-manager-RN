@@ -3,7 +3,6 @@ import moment from 'moment';
 import axios from 'axios';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Text, View, TextInput, StyleSheet, TouchableOpacity, Platform, Modal } from "react-native";
-import { AntDesign } from '@expo/vector-icons';
 
 const expensesCategoryArray: string[] = ["Need", "Want", "Invest"];
 const transactionCategoryArray: string[] = ["Expenses", "Income"];

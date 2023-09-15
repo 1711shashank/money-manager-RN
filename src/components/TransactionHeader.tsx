@@ -3,9 +3,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { calculateTotalExpenses, formatAmount } from '../utility/helperFunction';
 import { useEffect } from 'react';
+import { Picker } from "@react-native-picker/picker";
 
 
-const TransactionHeader = ({ transactionData }: any) => {
+const TransactionHeader = ({ transactionData, uniqueMonthsAndYears }: any) => {
+
+    const [selectedMonthYear, setSelectedMonthYear] = useState(uniqueMonthsAndYears[0]);
+
 
     const { totalIncome, totalExpenses } = calculateTotalExpenses(transactionData);
 
@@ -15,10 +19,29 @@ const TransactionHeader = ({ transactionData }: any) => {
 
     return (
         <>
+            {/* <View style={styles.header}>
+                <View style={styles.headerContent}>
+                    <Text style={styles.headerText}> {uniqueMonthsAndYears[0]} </Text>
+                    <MaterialIcons name="keyboard-arrow-down" size={24} color="lightgray" />
+                </View>
+            </View> */}
+
             <View style={styles.header}>
                 <View style={styles.headerContent}>
-                    <Text style={styles.headerText}> August 2023 </Text>
-                    <MaterialIcons name="keyboard-arrow-down" size={24} color="lightgray" />
+                    <Picker
+                        selectedValue={selectedMonthYear}
+                        onValueChange={(itemValue, index) => setSelectedMonthYear(itemValue)}
+                        style={styles.picker}
+                        dropdownIconColor='#2c2c2c'
+                        dropdownIconRippleColor='#2c2c2c'
+                        numberOfLines={5}
+                    >
+                        {uniqueMonthsAndYears.map((monthYear: any, index: number) => (
+                            <Picker.Item key={index} label={monthYear} value={monthYear} />
+                        ))}
+                    </Picker>
+                    <MaterialIcons name="keyboard-arrow-down" size={24} color="white" style={{ marginLeft: -65 }} />
+
                 </View>
             </View>
 
@@ -41,9 +64,11 @@ const TransactionHeader = ({ transactionData }: any) => {
 };
 
 const styles = StyleSheet.create({
+
+
+
     header: {
         backgroundColor: '#2c2c2c',
-        paddingHorizontal: 15,
         paddingTop: 30,
         // marginTop: StatusBar.currentHeight || 0
 
@@ -51,12 +76,13 @@ const styles = StyleSheet.create({
     headerContent: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 10,
     },
-    headerText: {
-        fontSize: 15,
+    picker: {
+        width: '40%',
         color: 'white',
     },
+
+
     summaryCard: {
         backgroundColor: '#2c2c2c',
         margin: 10,
