@@ -8,7 +8,7 @@ type TransactionItemProps = {
     amount: number;
     message: string;
     expensesCategory: string;
-    transactionCategory: string;
+    transactionType: string;
 };
 
 type TransactionDataProps = {
@@ -24,8 +24,11 @@ type SectionDataProps = {
 
 const TransactionBody = ({ transactionData }: any) => {
 
+
+    console.log(transactionData.Data)
+
     const data: SectionDataProps[] = transactionData.map((item: TransactionDataProps) => ({
-        title: item.date,
+        title: moment(item.date).format('DD MMM YYYY'),
         data: item.data,
     }));
 

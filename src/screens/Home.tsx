@@ -23,7 +23,7 @@ const Home = () => {
 
     useEffect(() => {
         fetchData();
-    }, [])
+    }, [modalVisible])
 
 
     return (

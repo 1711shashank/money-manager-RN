@@ -6,7 +6,7 @@ type TransactionItemProps = {
     amount: number;
     message: string;
     expensesCategory: string;
-    transactionCategory: string;
+    transactionType: string;
 };
 
 const TransactionRecordsByDate: React.FC<{ item: TransactionItemProps }> = ({ item }) => {
@@ -24,7 +24,11 @@ const TransactionRecordsByDate: React.FC<{ item: TransactionItemProps }> = ({ it
                         <Text style={{ fontSize: 14, color: 'gray' }}>{item.expensesCategory}</Text>
                     </View>
                 </View>
-                <Text style={{ fontSize: 18, color: 'white' }}>{item.amount}</Text>
+                {
+                    item.transactionType === 'Income'
+                        ? <Text style={{ fontSize: 20, color: '#846EFD' }}>{item.amount}</Text>
+                        : <Text style={{ fontSize: 18, color: 'white' }}>{item.amount}</Text>
+                }
             </View>
         </>
     );

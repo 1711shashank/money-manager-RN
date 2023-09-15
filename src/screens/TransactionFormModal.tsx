@@ -3,6 +3,7 @@ import moment from 'moment';
 import axios from 'axios';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Text, View, TextInput, StyleSheet, TouchableOpacity, Platform, Modal } from "react-native";
+import { AntDesign } from '@expo/vector-icons';
 
 const expensesCategoryArray: string[] = ["Need", "Want", "Invest"];
 const transactionCategoryArray: string[] = ["Expenses", "Income"];
@@ -17,12 +18,21 @@ const NewTransactionForm = ({ modalVisible, setModalVisible }: any) => {
 	const [transactionType, setTransactionType] = useState<string>("Expenses");
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
-
 	const handleAmountChange = (num: string) => {
 		const parsedAmount = parseInt(num);
 		setAmount(parsedAmount);
-		setIsDisabled(!parsedAmount || parsedAmount === 0);
+		updateSubmitButtonStatus(parsedAmount, message);
 	};
+
+	const handleMessageChange = (text: string) => {
+		setMessage(text);
+		updateSubmitButtonStatus(amount, text);
+	};
+
+	const updateSubmitButtonStatus = (newAmount: number, newMessage: string) => {
+		setIsDisabled(!newAmount || newAmount === 0 || newMessage.trim() === '');
+	};
+
 
 	const toggleDatePicker = () => {
 		setShowDatePicker(!showDatePicker);
@@ -39,7 +49,7 @@ const NewTransactionForm = ({ modalVisible, setModalVisible }: any) => {
 	const handleSubmit = () => {
 
 		const newData = {
-			date: moment(date).format('DD MMM YYYY'),
+			date: new Date(moment(date).format('YYYY-MM-DD')),
 			data: {
 				amount,
 				message,
@@ -51,6 +61,7 @@ const NewTransactionForm = ({ modalVisible, setModalVisible }: any) => {
 
 		postDataToBackend(newData);
 		setModalVisible(false);
+
 	};
 
 	return (
@@ -62,7 +73,6 @@ const NewTransactionForm = ({ modalVisible, setModalVisible }: any) => {
 					setModalVisible(!modalVisible);
 				}}>
 				<View style={styles.container}>
-
 					<View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-evenly" }}>
 						{transactionCategoryArray.map((currItem, index) => (
 							<TouchableOpacity
@@ -88,7 +98,7 @@ const NewTransactionForm = ({ modalVisible, setModalVisible }: any) => {
 						<Text style={styles.label}>Message</Text>
 						<TextInput
 							style={styles.input}
-							onChangeText={(text) => setMessage(text)}
+							onChangeText={handleMessageChange}
 						/>
 					</View>
 
@@ -130,7 +140,6 @@ const NewTransactionForm = ({ modalVisible, setModalVisible }: any) => {
 							))}
 						</View>
 					}
-
 					<TouchableOpacity style={{ flex: 1 }} disabled={isDisabled} onPress={handleSubmit} >
 						<Text style={[styles.submitButton, isDisabled && styles.disabledsubmitButton]}>Submit</Text>
 					</TouchableOpacity>
@@ -147,7 +156,7 @@ const styles = StyleSheet.create({
 		width: '100%',
 		height: '100%',
 		padding: 5,
-		paddingTop: 100,
+		paddingTop: 80,
 		alignItems: "stretch",
 		backgroundColor: '#1A1A1A',
 		justifyContent: "space-between",
@@ -208,7 +217,7 @@ const styles = StyleSheet.create({
 		color: "white",
 	},
 	submitButton: {
-		marginTop: 30,
+		marginTop: 10,
 		marginHorizontal: 12,
 		padding: 16,
 		color: 'white',
