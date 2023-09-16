@@ -5,9 +5,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { calculateTotalExpenses, formatAmount } from '../utility/helperFunction';
 
 
-const TransactionHeader = ({ transactionData, uniqueMonthsAndYears, selectedMonth, setSelectedMonth }: any) => {
+const TransactionHeader = ({ selectedMonthData, uniqueMonthsAndYears, selectedMonth, setSelectedMonth }: any) => {
 
-    const { totalIncome, totalExpenses } = calculateTotalExpenses(transactionData);
+    const { totalIncome, totalExpenses } = calculateTotalExpenses(selectedMonthData);
 
     const formatedTotalIncome = formatAmount(totalIncome);
     const formatedTotalExpenses = formatAmount(totalExpenses);

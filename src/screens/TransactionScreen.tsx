@@ -11,7 +11,7 @@ const TransactionScreen = ({ transactionData, uniqueMonthsAndYears, selectedMont
     return (
         <>
             <View style={{ flex: 1 }}>
-                <TransactionHeader transactionData={transactionData} uniqueMonthsAndYears={uniqueMonthsAndYears} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
+                <TransactionHeader selectedMonthData={selectedMonthData} uniqueMonthsAndYears={uniqueMonthsAndYears} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
                 <TransactionBody selectedMonthData={selectedMonthData} />
             </View>
         </>

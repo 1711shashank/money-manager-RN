@@ -43,7 +43,7 @@ export const extractMonthsAndYears = (dateArray: any[]) => {
     });
 
     return uniqueMonthsAndYears;
-};
+}
 
 export const filterDataByMonth = (transactionData: any, selectedMonth: any) => {
 
