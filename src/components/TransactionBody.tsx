@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, SectionList, StatusBar, TouchableOpacity } from 'react-native';
+import React from 'react';
 import moment from 'moment';
 import TransactionRocordsByDate from './TransactionRocordsByDate'
-import { filterDataByMonth, toString_MonthsAndYear } from '../utility/helperFunction';
+import { StyleSheet, Text, SafeAreaView, SectionList } from 'react-native';
 
 
 type TransactionItemProps = {
@@ -23,9 +22,7 @@ type SectionDataProps = {
 };
 
 
-const TransactionBody = ({ transactionData, selectedMonth }: any) => {
-
-    const selectedMonthData = filterDataByMonth(transactionData, selectedMonth);
+const TransactionBody = ({ selectedMonthData }: any) => {
 
     const data: SectionDataProps[] = selectedMonthData.map((item: TransactionDataProps) => ({
         title: moment(item.date).format('DD MMM YYYY'),

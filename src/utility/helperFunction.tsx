@@ -2,7 +2,6 @@ export const toString_MonthsAndYear = (date: Date) => {
     return `${date.toLocaleString('en-US', { month: 'short' })} ${date.getFullYear()}`
 }
 
-
 export const formatAmount = (amount: number) => {
     const formatedAmount = amount.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 });
     return formatedAmount;

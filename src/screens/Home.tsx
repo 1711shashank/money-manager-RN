@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Pressable, View } from 'react-native';
-import TransactionFormModal from './TransactionFormModal';
 import { AntDesign } from '@expo/vector-icons';
+import React, { useState, useEffect } from 'react';
 import TransactionScreen from './TransactionScreen';
+import TransactionFormModal from './TransactionFormModal';
+import { StyleSheet, Pressable, View } from 'react-native';
 import { extractMonthsAndYears, toString_MonthsAndYear } from '../utility/helperFunction';
 
 const Home = () => {
@@ -35,7 +35,7 @@ const Home = () => {
         <>
             <View style={styles.homeScreen}>
 
-                <TransactionScreen transactionData={transactionData} uniqueMonthsAndYears={uniqueMonthsAndYears} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth}/>
+                <TransactionScreen transactionData={transactionData} uniqueMonthsAndYears={uniqueMonthsAndYears} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
 
                 <Pressable onPress={() => setModalVisible(true)} style={styles.addIconContainer}>
                     <AntDesign name="pluscircle" size={60} color="#846EFD" style={styles.addIcon} />

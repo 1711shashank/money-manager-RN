@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
-import { calculateTotalExpenses, formatAmount } from '../utility/helperFunction';
 import { Picker } from "@react-native-picker/picker";
+import { StyleSheet, Text, View } from 'react-native';
+import { calculateTotalExpenses, formatAmount } from '../utility/helperFunction';
 
 
 const TransactionHeader = ({ transactionData, uniqueMonthsAndYears, selectedMonth, setSelectedMonth }: any) => {
-
 
     const { totalIncome, totalExpenses } = calculateTotalExpenses(transactionData);
 
@@ -20,7 +19,7 @@ const TransactionHeader = ({ transactionData, uniqueMonthsAndYears, selectedMont
                 <View style={styles.headerContent}>
                     <Picker
                         selectedValue={selectedMonth}
-                        onValueChange={(itemValue, index) => setSelectedMonth(itemValue)}
+                        onValueChange={(itemValue) => setSelectedMonth(itemValue)}
                         style={styles.picker}
                         dropdownIconColor='#2c2c2c'
                         dropdownIconRippleColor='#2c2c2c'
