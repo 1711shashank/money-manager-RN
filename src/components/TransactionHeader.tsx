@@ -5,9 +5,7 @@ import { calculateTotalExpenses, formatAmount } from '../utility/helperFunction'
 import { Picker } from "@react-native-picker/picker";
 
 
-const TransactionHeader = ({ transactionData, uniqueMonthsAndYears }: any) => {
-
-    const [selectedMonthYear, setSelectedMonthYear] = useState(uniqueMonthsAndYears[0]);
+const TransactionHeader = ({ transactionData, uniqueMonthsAndYears, selectedMonth, setSelectedMonth }: any) => {
 
 
     const { totalIncome, totalExpenses } = calculateTotalExpenses(transactionData);
@@ -21,8 +19,8 @@ const TransactionHeader = ({ transactionData, uniqueMonthsAndYears }: any) => {
             <View style={styles.header}>
                 <View style={styles.headerContent}>
                     <Picker
-                        selectedValue={selectedMonthYear}
-                        onValueChange={(itemValue, index) => setSelectedMonthYear(itemValue)}
+                        selectedValue={selectedMonth}
+                        onValueChange={(itemValue, index) => setSelectedMonth(itemValue)}
                         style={styles.picker}
                         dropdownIconColor='#2c2c2c'
                         dropdownIconRippleColor='#2c2c2c'

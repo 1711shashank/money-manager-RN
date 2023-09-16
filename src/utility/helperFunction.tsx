@@ -1,3 +1,7 @@
+export const toString_MonthsAndYear = (date: Date) => {
+    return `${date.toLocaleString('en-US', { month: 'short' })} ${date.getFullYear()}`
+}
+
 
 export const formatAmount = (amount: number) => {
     const formatedAmount = amount.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 });
@@ -21,18 +25,17 @@ export const calculateTotalExpenses = (transactionData: any) => {
     return { totalIncome, totalExpenses };
 }
 
-
 export const extractMonthsAndYears = (dateArray: any[]) => {
 
     const extractData = dateArray.map((item: any) => new Date(item.date));
-
     const sortedDates = extractData.sort((a, b) => b.getTime() - a.getTime());
+    sortedDates.push(new Date());       // current date must be present in the array
 
     const uniqueMonthsAndYears: string[] = [];
 
     sortedDates.filter((date: any) => {
 
-        const monthYear = `${date.toLocaleString('en-US', { month: 'short' })} ${date.getFullYear()}`;
+        const monthYear = toString_MonthsAndYear(date);
 
         if (!uniqueMonthsAndYears.includes(monthYear)) {
             uniqueMonthsAndYears.push(monthYear);
@@ -42,3 +45,15 @@ export const extractMonthsAndYears = (dateArray: any[]) => {
 
     return uniqueMonthsAndYears;
 };
+
+export const filterDataByMonth = (transactionData: any, selectedMonth: any) => {
+
+    const selectedMonthData = transactionData.filter((item: any) => {
+
+        const itemMonth = toString_MonthsAndYear(new Date(item.date));
+        if (selectedMonth === itemMonth) return item;
+
+    })
+
+    return selectedMonthData;
+}
