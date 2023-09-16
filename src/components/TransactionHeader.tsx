@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { calculateTotalExpenses, formatAmount } from '../utility/helperFunction';
-import { useEffect } from 'react';
 import { Picker } from "@react-native-picker/picker";
 
 
@@ -19,13 +18,6 @@ const TransactionHeader = ({ transactionData, uniqueMonthsAndYears }: any) => {
 
     return (
         <>
-            {/* <View style={styles.header}>
-                <View style={styles.headerContent}>
-                    <Text style={styles.headerText}> {uniqueMonthsAndYears[0]} </Text>
-                    <MaterialIcons name="keyboard-arrow-down" size={24} color="lightgray" />
-                </View>
-            </View> */}
-
             <View style={styles.header}>
                 <View style={styles.headerContent}>
                     <Picker
@@ -34,7 +26,6 @@ const TransactionHeader = ({ transactionData, uniqueMonthsAndYears }: any) => {
                         style={styles.picker}
                         dropdownIconColor='#2c2c2c'
                         dropdownIconRippleColor='#2c2c2c'
-                        numberOfLines={5}
                     >
                         {uniqueMonthsAndYears.map((monthYear: any, index: number) => (
                             <Picker.Item key={index} label={monthYear} value={monthYear} />

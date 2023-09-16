@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { expensesDataArray } from "./dummyData";
 
 export const formatAmount = (amount: number) => {
     const formatedAmount = amount.toLocaleString('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 });
@@ -25,14 +23,22 @@ export const calculateTotalExpenses = (transactionData: any) => {
 
 
 export const extractMonthsAndYears = (dateArray: any[]) => {
+
+    const extractData = dateArray.map((item: any) => new Date(item.date));
+
+    const sortedDates = extractData.sort((a, b) => b.getTime() - a.getTime());
+
     const uniqueMonthsAndYears: string[] = [];
-    dateArray.filter((entry: any) => {
-        const date = new Date(entry.date);
+
+    sortedDates.filter((date: any) => {
+
         const monthYear = `${date.toLocaleString('en-US', { month: 'short' })} ${date.getFullYear()}`;
 
         if (!uniqueMonthsAndYears.includes(monthYear)) {
             uniqueMonthsAndYears.push(monthYear);
         }
+
     });
+
     return uniqueMonthsAndYears;
 };

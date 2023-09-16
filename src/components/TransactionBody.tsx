@@ -24,9 +24,6 @@ type SectionDataProps = {
 
 const TransactionBody = ({ transactionData }: any) => {
 
-
-    console.log(transactionData.Data)
-
     const data: SectionDataProps[] = transactionData.map((item: TransactionDataProps) => ({
         title: moment(item.date).format('DD MMM YYYY'),
         data: item.data,
