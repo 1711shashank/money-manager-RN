@@ -1,7 +1,7 @@
 import { AntDesign } from '@expo/vector-icons';
 import React, { useState, useEffect } from 'react';
 import TransactionScreen from './TransactionScreen';
-import TransactionFormModal from './TransactionFormModal';
+import NewTransactionForm from './NewTransactionForm';
 import { StyleSheet, Pressable, View } from 'react-native';
 import { extractMonthsAndYears, toString_MonthsAndYear } from '../utility/helperFunction';
 
@@ -43,7 +43,7 @@ const Home = () => {
 
             </View>
 
-            <TransactionFormModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <NewTransactionForm modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </>
     );
 };
