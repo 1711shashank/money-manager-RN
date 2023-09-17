@@ -6,7 +6,7 @@ const ModalHeader = ({ amountString, setMessageText, setTextInputFocused }: any)
         <>
             <View style={styles.modalHeader}>
                 <TextInput
-                    placeholder='Message'
+                    placeholder='Memo'
                     style={styles.messageInput}
                     onFocus={() => setTextInputFocused(true)}
                     onChangeText={(text) => setMessageText(text)}
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'gray',
     },
     messageInput: {
-        flex: 2,
+        flex: 1,
         marginLeft: 15,
         fontSize: 14,
         color: 'white',
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'right',
         marginRight: 5,
-        fontSize: 20,
+        fontSize: 22,
     },
 
 })

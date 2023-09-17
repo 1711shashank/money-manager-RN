@@ -33,9 +33,11 @@ const Screen1 = () => {
     ];
 
     const handleNumberPress = (number) => {
-        (amountString === '0' || amountString === '+' || amountString === '-' ||  amountString === '*')
+        (amountString === '0' || amountString === '+' || amountString === '-' || amountString === '*')
             ? setAmountString(number)
-            : setAmountString(amountString + number)
+            : (amountString.length < 12)
+                ? setAmountString(amountString + number)
+                : setAmountString(amountString)
     };
 
     const handleBackPress = () => {
