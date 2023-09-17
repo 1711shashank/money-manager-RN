@@ -6,10 +6,9 @@ import ModalHeader from './ModalHeader';
 const Screen1 = () => {
     const [modalVisible, setModalVisible] = useState(true);
 
-    const [amount, setAmount] = useState('0');
+    const [amountString, setAmountString] = useState('0');
     const [messageText, setMessageText] = useState('');
     const [selectedDate, setSelectedDate] = useState(null);
-    const [submitIcon, setSubmitIcon] = useState('check');
     const [textInputFocused, setTextInputFocused] = useState(false);
 
 
@@ -26,8 +25,6 @@ const Screen1 = () => {
     }, [textInputFocused]);
 
 
-
-
     const matrixValues = [
         ['1', '2', '3', '12/08'],
         ['4', '5', '6', '+'],
@@ -36,24 +33,21 @@ const Screen1 = () => {
     ];
 
     const handleNumberPress = (number) => {
-        if (amount === '0' || amount === '+' || amount === '-') {
-            setAmount(number);
-        } else {
-            setAmount(amount + number);
-        }
+        (amountString === '0' || amountString === '+' || amountString === '-' ||  amountString === '*')
+            ? setAmountString(number)
+            : setAmountString(amountString + number)
     };
 
     const handleBackPress = () => {
-        amount.length === 1
-            ? setAmount('0')
-            : setAmount(amount.slice(0, -1))
+        amountString.length === 1
+            ? setAmountString('0')
+            : setAmountString(amountString.slice(0, -1))
     };
 
     const handleSubmit = () => {
         console.log("Text:", messageText);
-        console.log("Input Value:", amount);
-        setAmount('0');
-        setSubmitIcon('check');
+        console.log("Input Value:", amountString);
+        setAmountString('0');
     };
 
     const handleDateChange = (date) => {
@@ -71,13 +65,13 @@ const Screen1 = () => {
                 <View style={styles.modal}>
                     <View style={styles.modalContent}>
 
-                        <ModalHeader amount={amount} setMessageText={setMessageText} setTextInputFocused={setTextInputFocused} />
+                        <ModalHeader amountString={amountString} setMessageText={setMessageText} setTextInputFocused={setTextInputFocused} />
                         {
                             !textInputFocused &&
                             <KeyPad
                                 matrixValues={matrixValues}
-                                amount={amount}
-                                setAmount={setAmount}
+                                amountString={amountString}
+                                setAmountString={setAmountString}
                                 handleSubmit={handleSubmit}
                                 handleBackPress={handleBackPress}
                                 handleNumberPress={handleNumberPress}
@@ -92,9 +86,8 @@ const Screen1 = () => {
             <Pressable
                 style={[styles.button, styles.buttonOpen]}
                 onPress={() => {
-                    setAmount('0');
+                    setAmountString('0');
                     setSelectedDate(null);
-                    setSubmitIcon('check');
                     setModalVisible(true);
                 }}>
                 <Text style={styles.buttonText}>Show Modal</Text>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { TextInput, View, Text, StyleSheet } from 'react-native'
 
-const ModalHeader = ({ amount, setMessageText, setTextInputFocused }: any) => {
+const ModalHeader = ({ amountString, setMessageText, setTextInputFocused }: any) => {
     return (
         <>
             <View style={styles.modalHeader}>
@@ -11,7 +11,7 @@ const ModalHeader = ({ amount, setMessageText, setTextInputFocused }: any) => {
                     onFocus={() => setTextInputFocused(true)}
                     onChangeText={(text) => setMessageText(text)}
                 />
-                <Text style={styles.amount}>{amount}</Text>
+                <Text style={styles.amount}>{amountString}</Text>
             </View>
         </>
     )
