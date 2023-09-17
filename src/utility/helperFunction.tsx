@@ -56,3 +56,8 @@ export const filterDataByMonth = (transactionData: any, selectedMonth: any) => {
 
     return selectedMonthData;
 }
+
+export const calculateString = (str: string) => {
+    const result = eval(str.replace(/[^-+*/\d.]/g, ''));
+    return result.toString()
+}
