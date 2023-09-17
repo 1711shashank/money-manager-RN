@@ -6,10 +6,11 @@ const ModalHeader = ({ amountString, setMessageText, setTextInputFocused }: any)
         <>
             <View style={styles.modalHeader}>
                 <TextInput
-                    placeholder='Memo'
                     style={styles.messageInput}
                     onFocus={() => setTextInputFocused(true)}
                     onChangeText={(text) => setMessageText(text)}
+                    placeholder='Message*'
+                    placeholderTextColor="gray"
                 />
                 <Text style={styles.amount}>{amountString}</Text>
             </View>
@@ -32,6 +33,7 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         fontSize: 14,
         color: 'white',
+        placeholderTextColor: 'white',
     },
     amount: {
         flex: 1,
