@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Alert, Modal, StyleSheet, TextInput, Text, Pressable, View, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Modal, StyleSheet, Text, Pressable, View, Keyboard, } from 'react-native';
 import KeyPad from './KeyPad';
 import ModalHeader from './ModalHeader';
 
@@ -9,7 +9,24 @@ const Screen1 = () => {
     const [amount, setAmount] = useState('0');
     const [messageText, setMessageText] = useState('');
     const [selectedDate, setSelectedDate] = useState(null);
-    const [submitIcon, setSubmitIcon] = useState('check'); 
+    const [submitIcon, setSubmitIcon] = useState('check');
+    const [textInputFocused, setTextInputFocused] = useState(false);
+
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => setTextInputFocused(true));
+        const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => setTextInputFocused(false));
+
+        // React Lifecycle => Cleanup the event listeners when the component unmounts 
+        return () => {
+            keyboardDidShowListener.remove();
+            keyboardDidHideListener.remove();
+        };
+
+    }, [textInputFocused]);
+
+
+
 
     const matrixValues = [
         ['1', '2', '3', '12/08'],
@@ -36,10 +53,8 @@ const Screen1 = () => {
         console.log("Text:", messageText);
         console.log("Input Value:", amount);
         setAmount('0');
-        setSubmitIcon('check'); 
+        setSubmitIcon('check');
     };
-
-
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
@@ -56,16 +71,18 @@ const Screen1 = () => {
                 <View style={styles.modal}>
                     <View style={styles.modalContent}>
 
-                        <ModalHeader amount={amount} setMessageText={setMessageText} />
-
-                        <KeyPad
-                            matrixValues={matrixValues}
-                            amount={amount}
-                            setAmount={setAmount}
-                            handleSubmit={handleSubmit}
-                            handleBackPress={handleBackPress}
-                            handleNumberPress={handleNumberPress}
-                        />
+                        <ModalHeader amount={amount} setMessageText={setMessageText} setTextInputFocused={setTextInputFocused} />
+                        {
+                            !textInputFocused &&
+                            <KeyPad
+                                matrixValues={matrixValues}
+                                amount={amount}
+                                setAmount={setAmount}
+                                handleSubmit={handleSubmit}
+                                handleBackPress={handleBackPress}
+                                handleNumberPress={handleNumberPress}
+                            />
+                        }
 
                     </View>
                 </View>

@@ -1,11 +1,16 @@
 import React from 'react'
 import { TextInput, View, Text, StyleSheet } from 'react-native'
 
-const ModalHeader = ({ amount, setMessageText }:any) => {
+const ModalHeader = ({ amount, setMessageText, setTextInputFocused }: any) => {
     return (
         <>
             <View style={styles.modalHeader}>
-                <TextInput style={styles.messageInput} placeholder='Message' onChangeText={(text) => setMessageText(text)} />
+                <TextInput
+                    placeholder='Message'
+                    style={styles.messageInput}
+                    onFocus={() => setTextInputFocused(true)}
+                    onChangeText={(text) => setMessageText(text)}
+                />
                 <Text style={styles.amount}>{amount}</Text>
             </View>
         </>
@@ -24,8 +29,8 @@ const styles = StyleSheet.create({
     },
     messageInput: {
         flex: 2,
-        marginLeft: 10,
-        fontSize: 16,
+        marginLeft: 15,
+        fontSize: 14,
         color: 'white',
     },
     amount: {
