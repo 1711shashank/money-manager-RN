@@ -1,10 +1,11 @@
 import { StyleSheet, View } from "react-native";
 import Home from "./src/screens/Home";
+import Screen1 from "./src/test/Screen1";
 
 export default function App() {
     return (
         <View style={styles.container}>
-            <Home/>
+            <Screen1/>
         </View>
     );
 }
