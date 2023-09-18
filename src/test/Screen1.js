@@ -5,11 +5,10 @@ import ModalHeader from './ModalHeader';
 import KeyPad from './KeyPad';
 
 const Screen1 = () => {
-    const [modalVisible, setModalVisible] = useState(true);
+    const [keypadModal, setKeypadModal] = useState(true);
 
     const [amountString, setAmountString] = useState('0');
     const [messageText, setMessageText] = useState('');
-    const [selectedDate, setSelectedDate] = useState(null);
     const [textInputFocused, setTextInputFocused] = useState(false);
 
 
@@ -51,21 +50,23 @@ const Screen1 = () => {
         console.log("Text:", messageText);
         console.log("Input Value:", amountString);
         setAmountString('0');
-        setModalVisible(false);
-    };
-
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
+        setKeypadModal(false);
     };
 
     return (
         <View style={styles.container}>
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => setModalVisible(false)}
-            >
+
+            <Pressable
+                style={[styles.button, styles.buttonOpen]}
+                onPress={() => {
+                    setAmountString('0');
+                    setKeypadModal(!keypadModal);
+                }}>
+                <Text style={styles.buttonText}>Show Modal</Text>
+            </Pressable>
+
+
+            {keypadModal && <>
                 <View style={styles.modal}>
                     <View style={styles.modalContent}>
 
@@ -84,18 +85,10 @@ const Screen1 = () => {
                         }
                     </View>
                 </View>
-            </Modal>
+            </>}
 
 
-            <Pressable
-                style={[styles.button, styles.buttonOpen]}
-                onPress={() => {
-                    setAmountString('0');
-                    setSelectedDate(null);
-                    setModalVisible(true);
-                }}>
-                <Text style={styles.buttonText}>Show Modal</Text>
-            </Pressable>
+
         </View>
     );
 };
@@ -106,10 +99,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 22,
+        marginTop: 220,
 
     },
     modal: {
+        position:'absolute',
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',

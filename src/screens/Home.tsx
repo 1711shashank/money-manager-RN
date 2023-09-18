@@ -4,10 +4,12 @@ import TransactionScreen from './TransactionScreen';
 import NewTransactionForm from './NewTransactionForm';
 import { StyleSheet, Pressable, View } from 'react-native';
 import { extractMonthsAndYears, toString_MonthsAndYear } from '../utility/helperFunction';
+import CategoryScreen from './CategoryScreen';
 
 const Home = () => {
     const [transactionData, setTransactionData] = useState<any[]>([]);
-    const [modalVisible, setModalVisible] = useState(false);
+    const [categoryModal, setCategoryModal] = useState(false);
+
 
     const uniqueMonthsAndYears = extractMonthsAndYears(transactionData);
     const [selectedMonth, setSelectedMonth] = useState(toString_MonthsAndYear(new Date()));
@@ -28,7 +30,7 @@ const Home = () => {
 
     useEffect(() => {
         fetchData();
-    }, [modalVisible])
+    }, [categoryModal])
 
 
     return (
@@ -37,13 +39,14 @@ const Home = () => {
 
                 <TransactionScreen transactionData={transactionData} uniqueMonthsAndYears={uniqueMonthsAndYears} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
 
-                <Pressable onPress={() => setModalVisible(true)} style={styles.addIconContainer}>
+                <Pressable onPress={() =>setCategoryModal(true)} style={styles.addIconContainer}>
                     <AntDesign name="pluscircle" size={60} color="#846EFD" style={styles.addIcon} />
                 </Pressable>
 
             </View>
 
-            <NewTransactionForm modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <CategoryScreen categoryModal={categoryModal}  setCategoryModal={setCategoryModal}/>
+
         </>
     );
 };

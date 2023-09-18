@@ -5,7 +5,8 @@ import Screen1 from "./src/test/Screen1";
 export default function App() {
     return (
         <View style={styles.container}>
-            <Screen1/>
+            {/* <Screen1/> */}
+            <Home />
         </View>
     );
 }

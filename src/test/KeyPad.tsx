@@ -80,11 +80,11 @@ const KeyPad = ({ messageText, matrixValues, amountString, setAmountString, hand
 
     return (
         <>
-            <View style={{ backgroundColor: '#242424' }}>
-                {matrixValues.map((row: any) => (
+            <View style={{ backgroundColor: '#242424', width:'100%' }}>
+                {matrixValues.map((row: any,) => (
                     <View style={styles.keypadRow} key={row.join('')}>
-                        {row.map((value: any) => (
-                            <TouchableOpacity style={styles.key} onPress={() => handleKeyPress(value)}>
+                        {row.map((value: any, index: number) => (
+                            <TouchableOpacity key={index} style={styles.key} onPress={() => handleKeyPress(value)}>
                                 <KeyPadHandler value={value} />
                             </TouchableOpacity>
                         ))}
