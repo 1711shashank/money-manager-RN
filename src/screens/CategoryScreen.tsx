@@ -1,11 +1,10 @@
+import { StyleSheet, Text, View, TouchableOpacity, Modal, Keyboard } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Pressable, Modal, Keyboard } from 'react-native';
-import KeyPad from '../components/KeyPad';
-import ModalHeader from '../components/ModalHeader';
-import { categoryDataArray, matrixValues } from '../utility/staticData';
 import moment from 'moment';
-import axios from 'axios';
+import KeyPad from '../components/KeyPad';
+import KeyPadInputCard from '../components/KeyPadInputCard';
 import { postDataToBackend } from '../utility/helperFunction';
+import { categoryDataArray, matrixValues } from '../utility/staticData';
 
 const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
 
@@ -34,7 +33,7 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
     const handleNumberPress = (number: any) => {
         (amountString === '0' || amountString === '+' || amountString === '-' || amountString === '*')
             ? setAmountString(number)
-            : (amountString.length < 12)
+            : (amountString.length < 10)
                 ? setAmountString(amountString + number)
                 : setAmountString(amountString)
     };
@@ -86,7 +85,7 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
                             <View style={[styles.icons, { backgroundColor: selectedCategory === item.id ? '#846EFD' : '#242424' }]} >
                                 {item.icon}
                             </View>
-                            <Text style={{ fontSize:10, color: selectedCategory === item.id ? '#846EFD' : 'lightgray' }} > {item.categoryName} </Text>
+                            <Text style={{ fontSize: 10, color: selectedCategory === item.id ? '#846EFD' : 'lightgray' }} > {item.categoryName} </Text>
                         </TouchableOpacity>
                     ))}
                 </View>
@@ -96,7 +95,7 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
                         <View style={styles.modal}>
                             <View style={styles.modalContent}>
 
-                                <ModalHeader
+                                <KeyPadInputCard
                                     amountString={amountString}
                                     setMessageText={setMessageText}
                                     setTextInputFocused={setTextInputFocused}
@@ -138,7 +137,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#1A1A1A',
     },
     iconCategory: {
-        width:'25%',
+        width: '25%',
         alignItems: 'center',
         justifyContent: 'flex-start',
         paddingVertical: 15,

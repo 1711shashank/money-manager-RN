@@ -17,9 +17,11 @@
     "moment": "^2.29.4",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-charts": "^4.0.1",
     "react-native": "0.72.4",
     "react-native-datepicker": "^1.7.2",
     "react-native-modal": "^13.0.1",
+    "react-native-pie-chart": "^3.0.1",
     "react-native-web": "~0.19.6"
   },
   "devDependencies": {

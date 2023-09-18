@@ -1,10 +1,10 @@
 import React from 'react'
 import { TextInput, View, Text, StyleSheet } from 'react-native'
 
-const ModalHeader = ({ amountString, setMessageText, setTextInputFocused }: any) => {
+const KeyPadInputCard = ({ amountString, setMessageText, setTextInputFocused }: any) => {
     return (
         <>
-            <View style={styles.modalHeader}>
+            <View style={styles.KeyPadInputCard}>
                 <TextInput
                     style={styles.messageInput}
                     onFocus={() => setTextInputFocused(true)}
@@ -19,7 +19,7 @@ const ModalHeader = ({ amountString, setMessageText, setTextInputFocused }: any)
 }
 
 const styles = StyleSheet.create({
-    modalHeader: {
+    KeyPadInputCard: {
         height: 50,
         flexDirection: 'row',
         backgroundColor: '#242424',
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default ModalHeader
+export default KeyPadInputCard

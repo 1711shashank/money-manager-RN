@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Picker } from "@react-native-picker/picker";
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native';
+import ExpensesAnalysisModal from './ExpensesAnalysisModal';
 
 
 const TransactionHeader = ({ uniqueMonthsAndYears, selectedMonth, setSelectedMonth }: any) => {
+
+    const [analysisModal, setAnalysisModal] = useState(false);
+
 
     return (
         <>
@@ -25,11 +29,15 @@ const TransactionHeader = ({ uniqueMonthsAndYears, selectedMonth, setSelectedMon
                         </Picker>
                         <MaterialIcons name="keyboard-arrow-down" size={24} color="white" />
                     </View>
-                    <TouchableOpacity style={{ flex: 1 }}>
+                    <TouchableOpacity onPress={() => setAnalysisModal(true)} style={{ flex: 1 }}>
                         <MaterialIcons name="show-chart" size={24} color="white" style={{ textAlign: 'right', paddingRight: 20 }} />
                     </TouchableOpacity>
                 </View>
+
+                <ExpensesAnalysisModal analysisModal={analysisModal} setAnalysisModal={setAnalysisModal} />
+
             </View>
+
         </>
     );
 };
