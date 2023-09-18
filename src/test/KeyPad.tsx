@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, Platform, Keyboard } from 'react-native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { calculateString } from '../utility/helperFunction';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
+
 
 const KeyPad = ({ messageText, matrixValues, amountString, setAmountString, handleSubmit, handleBackPress, handleNumberPress }: any) => {
 
+    const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
+    const [date, setDate] = useState<Date>(new Date());
+
+    const toggleDatePicker = () => {
+        setShowDatePicker(!showDatePicker);
+    };
+
     const handleKeyPress = (value: string) => {
-        if (value === 'submit') {
+
+        if (value === 'date') {
+            toggleDatePicker();
+        } else if (value === 'submit') {
 
             if (amountString.includes('+') || amountString.includes('-') || amountString.includes('*')) {
                 setAmountString(calculateString(amountString));
@@ -21,7 +34,7 @@ const KeyPad = ({ messageText, matrixValues, amountString, setAmountString, hand
             if (amountString.endsWith('+') || amountString.endsWith('-') || amountString.endsWith('*')) {
                 setAmountString(amountString.slice(0, -1) + value);
             }
-            else if (amountString.includes('+') || amountString.includes('-') || amountString.endsWith('*')) {
+            else if (amountString.includes('+') || amountString.includes('-') || amountString.includes('*')) {
                 setAmountString((prevAmount: string) => calculateString(prevAmount) + value);
             }
             else handleNumberPress(value);
@@ -33,31 +46,65 @@ const KeyPad = ({ messageText, matrixValues, amountString, setAmountString, hand
         }
     };
 
+    const KeyPadHandler = ({ value }: any) => {
+
+        let keyContent;
+
+        switch (value) {
+            case 'submit':
+                keyContent = amountString.includes('+') || amountString.includes('-') || amountString.includes('*')
+                    ? <Text style={styles.keyText}>=</Text>
+                    : <MaterialIcons name="check" size={30} color="white" />;
+                break;
+
+            case 'backspace':
+                keyContent = <Ionicons name="backspace-outline" size={25} color="white" />;
+                break;
+
+            case 'date':
+                keyContent = (
+                    <>
+                        <Text style={{ fontSize: 14, color: 'white' }}>{moment(date).format('DD/MM')}</Text>
+                        <Text style={{ fontSize: 10, color: 'lightgray' }}>{moment(date).format('YYYY')}</Text>
+                    </>
+                );
+                break;
+
+            default:
+                keyContent = <Text style={styles.keyText}>{value}</Text>;
+                break;
+        }
+
+        return keyContent;
+    }
+
     return (
         <>
             <View style={{ backgroundColor: '#242424' }}>
                 {matrixValues.map((row: any) => (
                     <View style={styles.keypadRow} key={row.join('')}>
                         {row.map((value: any) => (
-                            <TouchableOpacity
-                                style={styles.key}
-                                key={value}
-                                onPress={() => handleKeyPress(value)}
-                            >
-                                {
-                                    value === 'submit'
-                                        ? (amountString.includes('+') || amountString.includes('-') || amountString.includes('*'))
-                                            ? <Text style={styles.keyText}>{"="}</Text>
-                                            : <MaterialIcons name="check" size={30} color="white" />
-                                        : value === 'backspace'
-                                            ? <Ionicons name="backspace-outline" size={25} color="white" />
-                                            : <Text style={styles.keyText}>{value}</Text>
-                                }
+                            <TouchableOpacity style={styles.key} onPress={() => handleKeyPress(value)}>
+                                <KeyPadHandler value={value} />
                             </TouchableOpacity>
                         ))}
                     </View>
                 ))}
             </View>
+
+            {showDatePicker && (
+                <DateTimePicker
+                    value={date}
+                    mode="date"
+                    display={Platform.OS === 'ios' ? 'spinner' : 'calendar'}
+                    onChange={(event, date) => {
+                        if (date) {
+                            setDate(date);
+                            toggleDatePicker();
+                        }
+                    }}
+                />
+            )}
         </>
     );
 };

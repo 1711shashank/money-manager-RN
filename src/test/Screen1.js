@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
 import { Modal, StyleSheet, Text, Pressable, View, Keyboard, } from 'react-native';
-import KeyPad from './KeyPad';
+import React, { useState, useEffect } from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import ModalHeader from './ModalHeader';
+import KeyPad from './KeyPad';
 
 const Screen1 = () => {
     const [modalVisible, setModalVisible] = useState(true);
@@ -26,7 +27,7 @@ const Screen1 = () => {
 
 
     const matrixValues = [
-        ['1', '2', '3', '12/08'],
+        ['1', '2', '3', 'date'],
         ['4', '5', '6', '+'],
         ['7', '8', '9', '-'],
         ['*', '0', 'backspace', 'submit'],
