@@ -8,10 +8,7 @@ const KeyPad = ({ messageText, matrixValues, amountString, setAmountString, hand
     const handleKeyPress = (value: string) => {
         if (value === 'submit') {
 
-            if (amountString.endsWith('+') || amountString.endsWith('-') || amountString.endsWith('*')) {
-                setAmountString(amountString.slice(0, -1) + value);
-            }
-            else if (amountString.includes('+') || amountString.includes('-') || amountString.includes('*')) {
+            if (amountString.includes('+') || amountString.includes('-') || amountString.includes('*')) {
                 setAmountString(calculateString(amountString));
             }
             else if (messageText.trim() === "" || (Number(amountString) <= 0 || isNaN(Number(amountString)))) {
@@ -49,7 +46,7 @@ const KeyPad = ({ messageText, matrixValues, amountString, setAmountString, hand
                             >
                                 {
                                     value === 'submit'
-                                        ? (amountString.includes('+') || amountString.includes('-') || amountString.includes('*') && !(amountString.endsWith('+') || amountString.endsWith('-') || amountString.endsWith('*')))
+                                        ? (amountString.includes('+') || amountString.includes('-') || amountString.includes('*'))
                                             ? <Text style={styles.keyText}>{"="}</Text>
                                             : <MaterialIcons name="check" size={30} color="white" />
                                         : value === 'backspace'
