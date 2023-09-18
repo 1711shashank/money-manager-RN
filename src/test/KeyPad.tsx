@@ -1,21 +1,32 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { calculateString } from '../utility/helperFunction';
 
-const KeyPad = ({ matrixValues, amountString, setAmountString, handleSubmit, handleBackPress, handleNumberPress }: any) => {
+const KeyPad = ({ messageText, matrixValues, amountString, setAmountString, handleSubmit, handleBackPress, handleNumberPress }: any) => {
 
     const handleKeyPress = (value: string) => {
         if (value === 'submit') {
 
-            if (amountString.endsWith('+') || amountString.endsWith('-') ||  amountString.endsWith('*')) { setAmountString(amountString.slice(0, -1) + value); handleSubmit(); }
-            else if (amountString.includes('+') || amountString.includes('-') ||  amountString.endsWith('*')) setAmountString(calculateString(amountString));
+            if (messageText.trim() === "" || (Number(amountString) <= 0 || isNaN(Number(amountString)))) {
+                Alert.alert("Please fill both Amount and Memo fields.");
+            }
+            if (amountString.endsWith('+') || amountString.endsWith('-') || amountString.endsWith('*')) {
+                setAmountString(amountString.slice(0, -1) + value);
+            }
+            else if (amountString.includes('+') || amountString.includes('-') || amountString.includes('*')) {
+                setAmountString(calculateString(amountString));
+            }
             else handleSubmit();
 
-        } else if (value === '+' || value === '-') {
+        } else if (value === '+' || value === '-' || value === '*') {
 
-            if (amountString.endsWith('+') || amountString.endsWith('-') ||  amountString.endsWith('*')) setAmountString(amountString.slice(0, -1) + value);
-            else if (amountString.includes('+') || amountString.includes('-') ||  amountString.endsWith('*')) setAmountString((prevAmount: string) => calculateString(prevAmount) + value);
+            if (amountString.endsWith('+') || amountString.endsWith('-') || amountString.endsWith('*')) {
+                setAmountString(amountString.slice(0, -1) + value);
+            }
+            else if (amountString.includes('+') || amountString.includes('-') || amountString.endsWith('*')) {
+                setAmountString((prevAmount: string) => calculateString(prevAmount) + value);
+            }
             else handleNumberPress(value);
 
         } else if (value === 'backspace') {
@@ -38,7 +49,7 @@ const KeyPad = ({ matrixValues, amountString, setAmountString, handleSubmit, han
                             >
                                 {
                                     value === 'submit'
-                                        ? (amountString.includes('+') || amountString.includes('-') || amountString.includes('*') && !(amountString.endsWith('+') || amountString.endsWith('-') ||  amountString.endsWith('*')))
+                                        ? (amountString.includes('+') || amountString.includes('-') || amountString.includes('*') && !(amountString.endsWith('+') || amountString.endsWith('-') || amountString.endsWith('*')))
                                             ? <Text style={styles.keyText}>{"="}</Text>
                                             : <MaterialIcons name="check" size={30} color="white" />
                                         : value === 'backspace'

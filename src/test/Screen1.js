@@ -50,6 +50,7 @@ const Screen1 = () => {
         console.log("Text:", messageText);
         console.log("Input Value:", amountString);
         setAmountString('0');
+        setModalVisible(false);
     };
 
     const handleDateChange = (date) => {
@@ -71,6 +72,7 @@ const Screen1 = () => {
                         {
                             !textInputFocused &&
                             <KeyPad
+                                messageText={messageText}
                                 matrixValues={matrixValues}
                                 amountString={amountString}
                                 setAmountString={setAmountString}
@@ -79,7 +81,6 @@ const Screen1 = () => {
                                 handleNumberPress={handleNumberPress}
                             />
                         }
-
                     </View>
                 </View>
             </Modal>
