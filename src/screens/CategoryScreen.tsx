@@ -57,8 +57,6 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
             }
         };
 
-        console.log(newData);
-
         postDataToBackend(newData);
         setAmountString('0');
         setKeypadModal(false);
@@ -67,7 +65,6 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
     };
 
     const handleCategoryPress = (item: any) => {
-        console.log(item.id);
         setSelectedCategory(item.id);
         setAmountString('0');
         setKeypadModal(true);

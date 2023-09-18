@@ -1,9 +1,9 @@
 import { AntDesign } from '@expo/vector-icons';
 import React, { useState, useEffect } from 'react';
-import TransactionScreen from './TransactionScreen';
+import TransactionScreen from './screens/TransactionScreen';
 import { StyleSheet, Pressable, View } from 'react-native';
-import { extractMonthsAndYears, toString_MonthsAndYear } from '../utility/helperFunction';
-import CategoryScreen from './CategoryScreen';
+import { extractMonthsAndYears, toString_MonthsAndYear } from './utility/helperFunction';
+import CategoryScreen from './screens/CategoryScreen';
 
 const Home = () => {
     const [transactionData, setTransactionData] = useState<any[]>([]);
