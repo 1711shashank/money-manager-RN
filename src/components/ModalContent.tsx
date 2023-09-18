@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 
-const ModalContent = ({ inputValue, messageText, onMessageTextChange }) => {
+const ModalContent = ({ inputValue, messageText, onMessageTextChange }: any) => {
     return (
         <View style={styles.container}>
             <TextInput
@@ -11,7 +11,6 @@ const ModalContent = ({ inputValue, messageText, onMessageTextChange }) => {
                 onChangeText={onMessageTextChange}
             />
             <Text style={styles.inputValue}>{inputValue}</Text>
-            {/* ... other content */}
         </View>
     );
 };

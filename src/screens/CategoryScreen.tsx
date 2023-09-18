@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Pressable, Modal, Keyboard } from 'react-native';
-import KeyPad from '../test/KeyPad';
-import ModalHeader from '../test/ModalHeader';
+import KeyPad from '../components/KeyPad';
+import ModalHeader from '../components/ModalHeader';
 import { categoryDataArray, matrixValues } from '../utility/staticData';
 import moment from 'moment';
 import axios from 'axios';
@@ -45,7 +45,7 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
             : setAmountString(amountString.slice(0, -1))
     };
 
-   
+
     const handleSubmit = () => {
 
         const newData = {
@@ -63,7 +63,7 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
         setAmountString('0');
         setKeypadModal(false);
         setCategoryModal(false);
-        
+
     };
 
     const handleCategoryPress = (item: any) => {
@@ -153,15 +153,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
 
-
-
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 22,
-
-    },
     modal: {
         position: 'absolute',
         flex: 1,
@@ -174,19 +165,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
         width: '100%',
-    },
-
-    button: {
-        borderRadius: 20,
-        padding: 10,
-    },
-    buttonOpen: {
-        backgroundColor: '#F194FF',
-    },
-    buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
     },
 
 });

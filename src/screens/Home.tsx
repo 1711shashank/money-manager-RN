@@ -1,7 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
 import React, { useState, useEffect } from 'react';
 import TransactionScreen from './TransactionScreen';
-import NewTransactionForm from './NewTransactionForm';
 import { StyleSheet, Pressable, View } from 'react-native';
 import { extractMonthsAndYears, toString_MonthsAndYear } from '../utility/helperFunction';
 import CategoryScreen from './CategoryScreen';
@@ -39,13 +38,13 @@ const Home = () => {
 
                 <TransactionScreen transactionData={transactionData} uniqueMonthsAndYears={uniqueMonthsAndYears} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
 
-                <Pressable onPress={() =>setCategoryModal(true)} style={styles.addIconContainer}>
+                <Pressable onPress={() => setCategoryModal(true)} style={styles.addIconContainer}>
                     <AntDesign name="pluscircle" size={60} color="#846EFD" style={styles.addIcon} />
                 </Pressable>
 
             </View>
 
-            <CategoryScreen categoryModal={categoryModal}  setCategoryModal={setCategoryModal}/>
+            <CategoryScreen categoryModal={categoryModal} setCategoryModal={setCategoryModal} />
 
         </>
     );
