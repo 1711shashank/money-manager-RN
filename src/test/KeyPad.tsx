@@ -8,14 +8,14 @@ const KeyPad = ({ messageText, matrixValues, amountString, setAmountString, hand
     const handleKeyPress = (value: string) => {
         if (value === 'submit') {
 
-            if (messageText.trim() === "" || (Number(amountString) <= 0 || isNaN(Number(amountString)))) {
-                Alert.alert("Please fill both Amount and Memo fields.");
-            }
             if (amountString.endsWith('+') || amountString.endsWith('-') || amountString.endsWith('*')) {
                 setAmountString(amountString.slice(0, -1) + value);
             }
             else if (amountString.includes('+') || amountString.includes('-') || amountString.includes('*')) {
                 setAmountString(calculateString(amountString));
+            }
+            else if (messageText.trim() === "" || (Number(amountString) <= 0 || isNaN(Number(amountString)))) {
+                Alert.alert("Please fill both Amount and Memo fields.");
             }
             else handleSubmit();
 
