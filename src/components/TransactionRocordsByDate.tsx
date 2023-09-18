@@ -1,27 +1,24 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View } from 'react-native';
+import { getCategoryData } from '../utility/helperFunction';
 
-type TransactionItemProps = {
-    amount: number;
-    message: string;
-    expensesCategory: string;
-    transactionType: string;
-};
 
-const TransactionRecordsByDate: React.FC<{ item: TransactionItemProps }> = ({ item }) => {
+const TransactionRecordsByDate = ({ item }: any) => {
+
+    const categoryData = getCategoryData(item);
+
     return (
         <>
             <View style={styles.expenseItemRow}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <View style={styles.icons}>
-                        <Ionicons name="fast-food-outline" size={24} color="lightgray" />
+                        {categoryData?.icon}
                     </View>
                     <View style={{ width: '60%' }}>
                         <Text style={{ fontSize: 16, color: 'white' }} numberOfLines={1} ellipsizeMode="tail">
                             {item.message}
                         </Text>
-                        <Text style={{ fontSize: 14, color: 'gray' }}>{item.expensesCategory}</Text>
+                        <Text style={{ fontSize: 14, color: 'gray' }}>{categoryData?.categoryName}</Text>
                     </View>
                 </View>
                 {

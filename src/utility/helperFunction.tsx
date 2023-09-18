@@ -1,3 +1,6 @@
+import axios from "axios";
+import { categoryDataArray } from "./staticData";
+
 export const toString_MonthsAndYear = (date: Date) => {
     return `${date.toLocaleString('en-US', { month: 'short' })} ${date.getFullYear()}`
 }
@@ -8,21 +11,26 @@ export const formatAmount = (amount: number) => {
 }
 
 export const calculateTotalExpenses = (transactionData: any) => {
-    const { totalIncome, totalExpenses } = transactionData.reduce((totals: { totalIncome: number, totalExpenses: number }, entry: any) => {
+    const { totalIncome, totalExpenses } = transactionData.reduce(
+        (totals: { totalIncome: number; totalExpenses: number }, entry: any) => {
+            entry.data.forEach((transaction: any) => {
 
-        entry.data.forEach((transaction: any) => {
+                const matchingCategory = categoryDataArray.find((category) => category.id === transaction.iconId);
 
-            if (transaction.transactionType === "Income") totals.totalIncome += transaction.amount;
-            else if (transaction.transactionType === "Expenses") totals.totalExpenses += transaction.amount;
+                if (matchingCategory) {
+                    if (matchingCategory.transactionType === 'Income') totals.totalIncome += transaction.amount;
+                    else if (matchingCategory.transactionType === 'Expenses') totals.totalExpenses += transaction.amount;
+                }
+            });
 
-        });
-
-        return totals;
-
-    }, { totalIncome: 0, totalExpenses: 0 });
+            return totals;
+        },
+        { totalIncome: 0, totalExpenses: 0 }
+    );
 
     return { totalIncome, totalExpenses };
-}
+};
+
 
 export const extractMonthsAndYears = (dateArray: any[]) => {
 
@@ -61,7 +69,20 @@ export const calculateString = (amountString: string) => {
     if (amountString.endsWith('+') || amountString.endsWith('-') || amountString.endsWith('*')) {
         amountString = amountString.slice(0, -1);
     }
-    
+
     const result = eval(amountString.replace(/[^-+*/\d.]/g, ''));
     return result.toString()
 }
+
+export const getCategoryData = (item: any) => {
+    const matchingCategory = categoryDataArray.find((categoryData) => categoryData.id === item.iconId)
+    return matchingCategory;
+}
+
+export const postDataToBackend = async (newData: Object) => {
+    try {
+        await axios.post('https://moneymanagerserver.onrender.com/addData', newData);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};

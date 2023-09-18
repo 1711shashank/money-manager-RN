@@ -6,10 +6,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
 
-const KeyPad = ({ messageText, matrixValues, amountString, setAmountString, handleSubmit, handleBackPress, handleNumberPress }: any) => {
+const KeyPad = ({ messageText, matrixValues, date, setDate, amountString, setAmountString, handleSubmit, handleBackPress, handleNumberPress }: any) => {
 
     const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
-    const [date, setDate] = useState<Date>(new Date());
 
     const toggleDatePicker = () => {
         setShowDatePicker(!showDatePicker);
@@ -80,7 +79,7 @@ const KeyPad = ({ messageText, matrixValues, amountString, setAmountString, hand
 
     return (
         <>
-            <View style={{ backgroundColor: '#242424', width:'100%' }}>
+            <View style={{ backgroundColor: '#242424', width: '100%' }}>
                 {matrixValues.map((row: any,) => (
                     <View style={styles.keypadRow} key={row.join('')}>
                         {row.map((value: any, index: number) => (

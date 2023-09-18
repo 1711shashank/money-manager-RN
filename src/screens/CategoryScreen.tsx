@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Pressable, Modal, Keyboard } from 'react-native';
-import { categoryDataArray } from '../utility/IconList';
 import KeyPad from '../test/KeyPad';
 import ModalHeader from '../test/ModalHeader';
+import { categoryDataArray, matrixValues } from '../utility/staticData';
+import moment from 'moment';
+import axios from 'axios';
+import { postDataToBackend } from '../utility/helperFunction';
 
 const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
 
+    const [date, setDate] = useState<Date>(new Date());
     const [messageText, setMessageText] = useState('');
     const [amountString, setAmountString] = useState('0');
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -26,12 +30,6 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
 
     }, [textInputFocused]);
 
-    const matrixValues = [
-        ['1', '2', '3', 'date'],
-        ['4', '5', '6', '+'],
-        ['7', '8', '9', '-'],
-        ['*', '0', 'backspace', 'submit'],
-    ];
 
     const handleNumberPress = (number: any) => {
         (amountString === '0' || amountString === '+' || amountString === '-' || amountString === '*')
@@ -47,15 +45,30 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
             : setAmountString(amountString.slice(0, -1))
     };
 
+   
     const handleSubmit = () => {
-        console.log("Text:", messageText);
-        console.log("Input Value:", amountString);
+
+        const newData = {
+            date: new Date(moment(date).format('YYYY-MM-DD')),
+            data: {
+                amount: parseInt(amountString),
+                message: messageText,
+                iconId: selectedCategory,
+            }
+        };
+
+        console.log(newData);
+
+        postDataToBackend(newData);
         setAmountString('0');
         setKeypadModal(false);
+        setCategoryModal(false);
+        
     };
 
-    const handleCategoryPress = (index: any) => {
-        setSelectedCategory(index);
+    const handleCategoryPress = (item: any) => {
+        console.log(item.id);
+        setSelectedCategory(item.id);
         setAmountString('0');
         setKeypadModal(true);
     };
@@ -70,13 +83,13 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
                     {categoryDataArray.map((item: any, index: any) => (
                         <TouchableOpacity
                             key={index}
-                            onPress={() => handleCategoryPress(index)}
+                            onPress={() => handleCategoryPress(item)}
                             style={styles.iconCategory}
                         >
-                            <View style={[styles.icons, { backgroundColor: selectedCategory === index ? '#846EFD' : '#242424' }]} >
+                            <View style={[styles.icons, { backgroundColor: selectedCategory === item.id ? '#846EFD' : '#242424' }]} >
                                 {item.icon}
                             </View>
-                            <Text style={{ color: selectedCategory === index ? '#846EFD' : 'lightgray' }} > {item.categoryName} </Text>
+                            <Text style={{ color: selectedCategory === item.id ? '#846EFD' : 'lightgray' }} > {item.categoryName} </Text>
                         </TouchableOpacity>
                     ))}
                 </View>
@@ -94,6 +107,8 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
 
                                 {!textInputFocused &&
                                     <KeyPad
+                                        date={date}
+                                        setDate={setDate}
                                         messageText={messageText}
                                         matrixValues={matrixValues}
                                         amountString={amountString}
@@ -109,10 +124,6 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
                     </>
                 }
             </Modal>
-
-
-
-
         </View>
     );
 };
