@@ -89,7 +89,7 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
                             <View style={[styles.icons, { backgroundColor: selectedCategory === item.id ? '#846EFD' : '#242424' }]} >
                                 {item.icon}
                             </View>
-                            <Text style={{ color: selectedCategory === item.id ? '#846EFD' : 'lightgray' }} > {item.categoryName} </Text>
+                            <Text style={{ fontSize:10, color: selectedCategory === item.id ? '#846EFD' : 'lightgray' }} > {item.categoryName} </Text>
                         </TouchableOpacity>
                     ))}
                 </View>
@@ -132,19 +132,19 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
 
 const styles = StyleSheet.create({
     categoryScreen: {
-        width: '100%',
         flexWrap: 'wrap',
         flex: 1,
         paddingTop: 70,
         flexDirection: 'row',
         alignItems: 'flex-start',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-around',
         backgroundColor: '#1A1A1A',
     },
     iconCategory: {
+        width:'25%',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        margin: 20,
+        paddingVertical: 15,
     },
     icons: {
         backgroundColor: '#242424',
