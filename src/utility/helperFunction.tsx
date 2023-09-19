@@ -89,22 +89,57 @@ export const postDataToBackend = async (newData: Object) => {
 
 
 export const calculate_BudgetPieChart = (selectedMonthData: any) => {
-
     const initialCartData = [
         { title: 'Need', amount: 0 },
         { title: 'Want', amount: 0 },
         { title: 'Invest', amount: 0 },
     ];
 
-    const chartData = selectedMonthData.reduce((acc: any, data: any) => {
-        return data.data.reduce((innerAcc: any, expense: any) => {
-            const categoryIndex = innerAcc.findIndex((item: any) => item.title === expense.budgetCategory);
-            if (categoryIndex !== -1) {
-                innerAcc[categoryIndex].amount += expense.amount;
-            }
-            return innerAcc;
-        }, acc);
+    const chartData = selectedMonthData.reduce((acc: any, entry: any) => {
+        for (const expense of entry.data) {
+
+            const categoryIndex = acc.findIndex((item: any) => item.title === expense.budgetCategory);
+            if (categoryIndex !== -1) acc[categoryIndex].amount += expense.amount;
+
+        }
+        return acc;
     }, initialCartData);
 
     return chartData;
 }
+
+
+export const calculate_ExpensesPieChart = (selectedMonthData: any) => {
+
+    const chartData = selectedMonthData.reduce((acc: any, entry: any) => {
+
+        entry.data.forEach((item: any) => {
+            const category = categoryDataArray.find((categoryItem: any) => categoryItem.id === item.iconId);
+            if (category) {
+
+                const existingItem = acc.find((chartItem: any) => chartItem.title === category.categoryName);
+                if (existingItem) existingItem.amount += item.amount;
+                else acc.push({ title: category.categoryName, amount: item.amount });
+                
+            }
+
+        });
+        return acc;
+    }, []);
+
+    return chartData;
+}
+
+export  const generateColors = (length: any) => {
+    const colors = [];
+    const hueStep = 360 / length;
+    const lightness: number = 70;
+
+    for (let i = 0; i < length; i++) {
+        const hue = i * hueStep;
+        const color = `hsl(${hue}, 70%, ${lightness}%)`;
+        colors.push(color);
+    }
+
+    return colors;
+};
