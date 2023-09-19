@@ -1,9 +1,11 @@
-import { Ionicons, SimpleLineIcons, Foundation, Feather, MaterialIcons, Entypo } from '@expo/vector-icons';
+import { Ionicons, SimpleLineIcons, Foundation, Feather, MaterialIcons, Entypo, FontAwesome, Octicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 export const budgetCategoryArray = ["Need", "Want", "Invest"];
 
+
 export const categoryDataArray = [
+    //Expenses
     {
         id: 1,
         categoryName: 'Food',
@@ -98,9 +100,59 @@ export const categoryDataArray = [
         id: 16,
         categoryName: 'Other',
         transactionType: 'Expenses',
-        icon: <Feather name="inbox" size={24} color="lightgray" />
-
+        icon: <Feather name="command" size={24} color="lightgray" />
     },
+
+    //Incomes
+    {
+        id: 101,
+        categoryName: 'Salary',
+        transactionType: 'Income',
+        icon: <MaterialCommunityIcons name="bank-outline" size={24} color="lightgray" />
+    },
+    {
+        id: 102,
+        categoryName: 'Pocket Money',
+        transactionType: 'Income',
+        icon: <Ionicons name="wallet-outline" size={24} color="lightgray" />
+    },
+    {
+        id: 103,
+        categoryName: 'Refunds',
+        transactionType: 'Income',
+        icon: <SimpleLineIcons name="refresh" size={24} color="lightgray" />
+    },
+    {
+        id: 104,
+        categoryName: 'Awards',
+        transactionType: 'Income',
+        icon: <MaterialCommunityIcons name="hand-coin-outline" size={24} color="lightgray" />
+    },
+    {
+        id: 105,
+        categoryName: 'Lottery',
+        transactionType: 'Income',
+        icon: <FontAwesome name="money" size={24} color="lightgray" />
+    },
+    {
+        id: 106,
+        categoryName: 'Rental',
+        transactionType: 'Income',
+        icon: <MaterialIcons name="storefront" size={24} color="lightgray" />
+    },
+    {
+        id: 107,
+        categoryName: 'Investment',
+        transactionType: 'Income',
+        icon: <Octicons name="graph" size={24} color="lightgray" />
+    },
+    {
+        id: 108,
+        categoryName: 'Others',
+        transactionType: 'Income',
+        icon: <Feather name="command" size={24} color="lightgray" />
+    },
+
 ];
 
 

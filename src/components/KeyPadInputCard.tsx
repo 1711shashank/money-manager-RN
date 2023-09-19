@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         fontSize: 14,
         color: 'white',
-        placeholderTextColor: 'white',
     },
     amount: {
         flex: 1,

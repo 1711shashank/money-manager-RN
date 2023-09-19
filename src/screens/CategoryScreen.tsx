@@ -1,10 +1,13 @@
-import { StyleSheet, Text, View, TouchableOpacity, Modal, Keyboard } from 'react-native';
+import { StyleSheet, View, Modal, Keyboard, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import KeyPad from '../components/KeyPad';
 import KeyPadInputCard from '../components/KeyPadInputCard';
 import { postDataToBackend } from '../utility/helperFunction';
-import { categoryDataArray, budgetCategoryArray, matrixValues } from '../utility/staticData';
+import { matrixValues } from '../utility/staticData';
+import BudgetCategoryRow from '../components/BudgetCategoryRow';
+import CategoryIcons from '../components/CategoryIcons';
+import { Text } from 'react-native';
 
 const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
 
@@ -14,9 +17,14 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [budgetCategory, setBudgetCategory] = useState<string>("Need");
 
+    const [activeTab, setActiveTab] = useState('Expenses');
     const [keypadModal, setKeypadModal] = useState(false);
     const [textInputFocused, setTextInputFocused] = useState(false);
 
+    useEffect(() => {
+        setSelectedCategory(null);
+        setActiveTab('Expenses');
+    }, [categoryModal])
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => setTextInputFocused(true));
@@ -29,7 +37,6 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
         };
 
     }, [textInputFocused]);
-
 
     const handleNumberPress = (number: any) => {
         (amountString === '0' || amountString === '+' || amountString === '-' || amountString === '*')
@@ -45,7 +52,6 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
             : setAmountString(amountString.slice(0, -1))
     };
 
-
     const handleSubmit = () => {
 
         const newData = {
@@ -54,7 +60,7 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
                 amount: parseInt(amountString),
                 message: messageText,
                 iconId: selectedCategory,
-                budgetCategory: budgetCategory,
+                budgetCategory: selectedCategory && selectedCategory < 100 ? budgetCategory : null
             }
         };
 
@@ -80,30 +86,32 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
 
                 <View style={styles.categoryScreen}>
 
-                    <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-evenly" }}>
-                        {budgetCategoryArray.map((currItem, index) => (
-                            <TouchableOpacity
-                                key={index}
-                                onPress={() => setBudgetCategory(currItem)}
-                                style={[styles.budgetCategory, budgetCategory === currItem && styles.budgetCategorySelected]}
-                            >
-                                <Text style={styles.categoryText}>{currItem}</Text>
-                            </TouchableOpacity>
-                        ))}
+                    <View style={{ width: '100%', flexDirection: 'row' }}>
+                        <TouchableOpacity
+                            style={[styles.tab, activeTab === 'Expenses' && styles.activeTab]}
+                            onPress={() => setActiveTab('Expenses')}
+                        >
+                            <Text style={[styles.tabText, activeTab === 'Expenses' && styles.activeTabText]}>
+                                Expenses
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.tab, activeTab === 'Income' && styles.activeTab]}
+                            onPress={() => setActiveTab('Income')}
+                        >
+                            <Text style={[styles.tabText, activeTab === 'Income' && styles.activeTabText]}>
+                                Income
+                            </Text>
+                        </TouchableOpacity>
+
                     </View>
 
-                    {categoryDataArray.map((item: any, index: any) => (
-                        <TouchableOpacity
-                            key={index}
-                            onPress={() => handleCategoryPress(item)}
-                            style={styles.iconCategory}
-                        >
-                            <View style={[styles.icons, { backgroundColor: selectedCategory === item.id ? '#846EFD' : '#242424' }]} >
-                                {item.icon}
-                            </View>
-                            <Text style={{ fontSize: 10, color: selectedCategory === item.id ? '#846EFD' : 'lightgray' }} > {item.categoryName} </Text>
-                        </TouchableOpacity>
-                    ))}
+                    {
+                        activeTab === 'Expenses' &&
+                        <BudgetCategoryRow budgetCategory={budgetCategory} setBudgetCategory={setBudgetCategory} />
+                    }
+                    <CategoryIcons transactionType={activeTab} selectedCategory={selectedCategory} handleCategoryPress={handleCategoryPress} />
+
                 </View>
 
                 {keypadModal &&
@@ -135,6 +143,7 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
                         </View>
                     </>
                 }
+
             </Modal>
         </View>
     );
@@ -146,24 +155,13 @@ const styles = StyleSheet.create({
     categoryScreen: {
         flexWrap: 'wrap',
         flex: 1,
-        paddingTop: 50,
         flexDirection: 'row',
         alignItems: 'flex-start',
         justifyContent: 'space-around',
         backgroundColor: '#1A1A1A',
+        // backgroundColor: '#2c2c2c',
     },
-    iconCategory: {
-        width: '25%',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        paddingVertical: 15,
-    },
-    icons: {
-        backgroundColor: '#242424',
-        padding: 10,
-        borderRadius: 50,
-        marginBottom: 10,
-    },
+
 
     modal: {
         position: 'absolute',
@@ -179,28 +177,26 @@ const styles = StyleSheet.create({
         width: '100%',
     },
 
-    budgetCategory: {
-        width: "28%",
-        paddingHorizontal: 25,
-        paddingVertical: 7,
-        margin: 5,
-        fontSize: 15,
-        backgroundColor: "transparent",
-        borderWidth: 1,
-        borderColor: "#846EFD",
-        borderRadius: 20,
-        color: "red",
-        marginBottom: 20
+    tab: {
+        flex: 1,
+        borderBottomColor: '#846EFD',
+        borderBottomWidth: 0,
+        marginBottom: 20,
+        backgroundColor: '#2c2c2c',
+        paddingTop: 20
     },
-    budgetCategorySelected: {
-        backgroundColor: "#846EFD",
-        borderRadius: 20,
+    activeTab: {
+        borderBottomWidth: 2,
     },
-    categoryText: {
-        textAlign: "center",
-        color: "white",
+    tabText: {
+        fontSize: 18,
+        color: 'white',
+        textAlign: 'center',
+        marginBottom: 8
     },
-
+    activeTabText: {
+        color: '#846EFD',
+    },
 });
 
 export default CategoryScreen;

@@ -114,13 +114,13 @@ export const calculate_ExpensesPieChart = (selectedMonthData: any) => {
     const chartData = selectedMonthData.reduce((acc: any, entry: any) => {
 
         entry.data.forEach((item: any) => {
-            const category = categoryDataArray.find((categoryItem: any) => categoryItem.id === item.iconId);
+            const category = categoryDataArray.find((categoryItem: any) => (categoryItem.id === item.iconId && categoryItem.id < 100));
             if (category) {
 
                 const existingItem = acc.find((chartItem: any) => chartItem.title === category.categoryName);
                 if (existingItem) existingItem.amount += item.amount;
                 else acc.push({ title: category.categoryName, amount: item.amount });
-                
+
             }
 
         });
@@ -130,7 +130,7 @@ export const calculate_ExpensesPieChart = (selectedMonthData: any) => {
     return chartData;
 }
 
-export  const generateColors = (length: any) => {
+export const generateColors = (length: any) => {
     const colors = [];
     const hueStep = 360 / length;
     const lightness: number = 70;
