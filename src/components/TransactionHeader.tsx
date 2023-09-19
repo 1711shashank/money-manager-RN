@@ -8,7 +8,7 @@ import ExpensesAnalysisModal from './ExpensesAnalysisModal';
 
 const TransactionHeader = ({ selectedMonthData, uniqueMonthsAndYears, selectedMonth, setSelectedMonth }: any) => {
 
-    const [analysisModal, setAnalysisModal] = useState(false);
+    const [analysisModal, setAnalysisModal] = useState(true);
 
     return (
         <>

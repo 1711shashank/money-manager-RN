@@ -3,15 +3,15 @@ import { Text } from 'react-native';
 import { View, StyleSheet } from 'react-native';
 import PieChart from 'react-native-pie-chart';
 
-const widthAndHeight = 120;
+const widthAndHeight = 200;
 
-const PieChartCard = ({ cardTitle, series, chartData, sliceColor }: any) => {
+const ExpensesPieChart = ({ series, chartData, sliceColor }: any) => {
 
     return (
         <>
             <View style={styles.cardView}>
 
-                <Text style={{ color: 'white', fontSize: 16, textAlign: 'center', marginBottom: 15 }}>{cardTitle}</Text>
+                <Text style={{ color: 'white', fontSize: 16, textAlign: 'center', marginBottom: 15 }}>Expenses Category</Text>
 
                 <View style={styles.pieChart}>
 
@@ -27,9 +27,8 @@ const PieChartCard = ({ cardTitle, series, chartData, sliceColor }: any) => {
                         {chartData.map((item: any, index: any) => (
                             <View key={index} style={styles.chartData}>
                                 <View style={{ backgroundColor: sliceColor[index], width: 10, height: 10, borderRadius: 10, marginRight: 8, }} />
-                                <Text style={styles.chartDataText}>
-                                    {item.title}: {item.amount}
-                                </Text>
+                                <Text style={styles.chartDataText}> {item.title}: </Text>
+                                <Text style={[styles.chartDataText, { color: 'lightgray' }]}> {item.amount}</Text>
                             </View>
                         ))}
                     </View>
@@ -48,30 +47,31 @@ const styles = StyleSheet.create({
         borderRadius: 15,
 
         marginVertical: 10,
-        paddingHorizontal: 35,
         paddingVertical: 15,
     },
     pieChart: {
-        flexDirection: 'row',
         alignItems: 'center',
         margin: 10,
     },
 
-
     chartDataContainer: {
-        paddingLeft: 50,
-        alignItems: 'flex-start',
+        width: '100%',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        paddingTop: 30,
         justifyContent: 'space-between',
     },
     chartData: {
+        width: '48%',
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 10,
+        marginBottom: 8,
+        paddingLeft: 10,
     },
     chartDataText: {
         color: 'white',
-        fontSize: 14,
+        fontSize: 15,
     },
 });
 
-export default PieChartCard;
+export default ExpensesPieChart;

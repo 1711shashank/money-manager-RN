@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Modal, StyleSheet } from 'react-native';
-import PieChartCard from './PieChartCard';
+import BudgetPieChart from './BudgetPieChart';
 import { calculate_BudgetPieChart, calculate_ExpensesPieChart, generateColors } from './../utility/helperFunction';
+import ExpensesPieChart from './ExpensesPieChart';
 
 
 
@@ -26,8 +27,8 @@ const ExpensesAnalysisModal = ({ analysisModal, setAnalysisModal, selectedMonthD
                     onRequestClose={() => { setAnalysisModal(false) }}
                 >
                     <View style={styles.analysisScreen}>
-                        <PieChartCard cardTitle={'Budget Category'} sliceColor={budgetPieChart_Color} chartData={budgetPieChart_Data} series={budgetPieChart_Series} />
-                        <PieChartCard cardTitle={'Expenses Category'} sliceColor={expensesPieChart_Colors} chartData={expensesPieChart_Data} series={expensesPieChart_Series} />
+                        <BudgetPieChart sliceColor={budgetPieChart_Color} chartData={budgetPieChart_Data} series={budgetPieChart_Series} />
+                        <ExpensesPieChart sliceColor={expensesPieChart_Colors} chartData={expensesPieChart_Data} series={expensesPieChart_Series} />
                     </View>
                 </Modal>
             </View>

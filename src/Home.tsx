@@ -7,7 +7,7 @@ import CategoryScreen from './screens/CategoryScreen';
 
 const Home = () => {
     const [transactionData, setTransactionData] = useState<any[]>([]);
-    const [categoryModal, setCategoryModal] = useState(true);
+    const [categoryModal, setCategoryModal] = useState(false);
 
 
     const uniqueMonthsAndYears = extractMonthsAndYears(transactionData);
