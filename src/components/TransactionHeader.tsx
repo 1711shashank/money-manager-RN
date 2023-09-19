@@ -6,10 +6,9 @@ import { TouchableOpacity } from 'react-native';
 import ExpensesAnalysisModal from './ExpensesAnalysisModal';
 
 
-const TransactionHeader = ({ uniqueMonthsAndYears, selectedMonth, setSelectedMonth }: any) => {
+const TransactionHeader = ({ selectedMonthData, uniqueMonthsAndYears, selectedMonth, setSelectedMonth }: any) => {
 
     const [analysisModal, setAnalysisModal] = useState(false);
-
 
     return (
         <>
@@ -34,7 +33,7 @@ const TransactionHeader = ({ uniqueMonthsAndYears, selectedMonth, setSelectedMon
                     </TouchableOpacity>
                 </View>
 
-                <ExpensesAnalysisModal analysisModal={analysisModal} setAnalysisModal={setAnalysisModal} />
+                <ExpensesAnalysisModal analysisModal={analysisModal} setAnalysisModal={setAnalysisModal} selectedMonthData={selectedMonthData} />
 
             </View>
 

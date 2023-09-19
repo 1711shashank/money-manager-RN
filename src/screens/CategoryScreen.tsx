@@ -4,9 +4,7 @@ import moment from 'moment';
 import KeyPad from '../components/KeyPad';
 import KeyPadInputCard from '../components/KeyPadInputCard';
 import { postDataToBackend } from '../utility/helperFunction';
-import { categoryDataArray, matrixValues } from '../utility/staticData';
-
-const budgetCategoryArray: string[] = ["Need", "Want", "Invest"];
+import { categoryDataArray, budgetCategoryArray, matrixValues } from '../utility/staticData';
 
 const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
 
@@ -15,7 +13,6 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
     const [amountString, setAmountString] = useState('0');
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [budgetCategory, setBudgetCategory] = useState<string>("Need");
-
 
     const [keypadModal, setKeypadModal] = useState(false);
     const [textInputFocused, setTextInputFocused] = useState(false);

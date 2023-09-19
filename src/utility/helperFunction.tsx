@@ -86,3 +86,25 @@ export const postDataToBackend = async (newData: Object) => {
         console.error('Error:', error);
     }
 };
+
+
+export const calculate_BudgetPieChart = (selectedMonthData: any) => {
+
+    const initialCartData = [
+        { title: 'Need', amount: 0 },
+        { title: 'Want', amount: 0 },
+        { title: 'Invest', amount: 0 },
+    ];
+
+    const chartData = selectedMonthData.reduce((acc: any, data: any) => {
+        return data.data.reduce((innerAcc: any, expense: any) => {
+            const categoryIndex = innerAcc.findIndex((item: any) => item.title === expense.budgetCategory);
+            if (categoryIndex !== -1) {
+                innerAcc[categoryIndex].amount += expense.amount;
+            }
+            return innerAcc;
+        }, acc);
+    }, initialCartData);
+
+    return chartData;
+}

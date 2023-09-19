@@ -1,5 +1,8 @@
 import { Ionicons, SimpleLineIcons, Foundation, Feather, MaterialIcons, Entypo } from '@expo/vector-icons';
 
+
+export const budgetCategoryArray = ["Need", "Want", "Invest"];
+
 export const categoryDataArray = [
     {
         id: 1,

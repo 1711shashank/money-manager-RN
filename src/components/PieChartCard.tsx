@@ -3,15 +3,14 @@ import { Text } from 'react-native';
 import { View, StyleSheet } from 'react-native';
 import PieChart from 'react-native-pie-chart';
 
-const PieChartCard = () => {
-    const widthAndHeight = 120;
-    const series = [300, 200, 350];
-    const sliceColor = ['#6efd84', '#fd846e', '#846efd'];
-    const chartData = [
-        { title: 'Need', amount: '350' },
-        { title: 'Want', amount: '200' },
-        { title: 'Invest', amount: '300' },
-    ];
+const widthAndHeight = 120;
+const sliceColor = ['#6efd84', '#fd846e', '#846efd'];
+
+
+
+const PieChartCard = ({ series, chartData }: any) => {
+
+
 
     return (
         <>
@@ -26,7 +25,7 @@ const PieChartCard = () => {
                 />
 
                 <View style={styles.chartDataContainer}>
-                    {chartData.map((item, index) => (
+                    {chartData.map((item: any, index: any) => (
                         <View key={index} style={styles.chartData}>
                             <View style={{ backgroundColor: sliceColor[index], width: 10, height: 10, borderRadius: 10, marginRight: 8, }} />
                             <Text style={styles.chartDataText}>
