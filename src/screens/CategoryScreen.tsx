@@ -66,6 +66,7 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
 
         postDataToBackend(newData);
         setAmountString('0');
+        setMessageText('');
         setKeypadModal(false);
         setCategoryModal(false);
 

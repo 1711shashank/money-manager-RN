@@ -4,8 +4,6 @@ import BudgetPieChart from './BudgetPieChart';
 import { calculate_BudgetPieChart, calculate_ExpensesPieChart, generateColors } from './../utility/helperFunction';
 import ExpensesPieChart from './ExpensesPieChart';
 
-
-
 const ExpensesAnalysisModal = ({ analysisModal, setAnalysisModal, selectedMonthData }: any) => {
 
     const budgetPieChart_Data = calculate_BudgetPieChart(selectedMonthData);
