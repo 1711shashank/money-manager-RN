@@ -6,12 +6,16 @@ import KeyPadInputCard from '../components/KeyPadInputCard';
 import { postDataToBackend } from '../utility/helperFunction';
 import { categoryDataArray, matrixValues } from '../utility/staticData';
 
+const budgetCategoryArray: string[] = ["Need", "Want", "Invest"];
+
 const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
 
     const [date, setDate] = useState<Date>(new Date());
     const [messageText, setMessageText] = useState('');
     const [amountString, setAmountString] = useState('0');
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [budgetCategory, setBudgetCategory] = useState<string>("Need");
+
 
     const [keypadModal, setKeypadModal] = useState(false);
     const [textInputFocused, setTextInputFocused] = useState(false);
@@ -53,6 +57,7 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
                 amount: parseInt(amountString),
                 message: messageText,
                 iconId: selectedCategory,
+                budgetCategory: budgetCategory,
             }
         };
 
@@ -75,7 +80,21 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
                 visible={categoryModal}
                 onRequestClose={() => setCategoryModal(!categoryModal)}
             >
+
                 <View style={styles.categoryScreen}>
+
+                    <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-evenly" }}>
+                        {budgetCategoryArray.map((currItem, index) => (
+                            <TouchableOpacity
+                                key={index}
+                                onPress={() => setBudgetCategory(currItem)}
+                                style={[styles.budgetCategory, budgetCategory === currItem && styles.budgetCategorySelected]}
+                            >
+                                <Text style={styles.categoryText}>{currItem}</Text>
+                            </TouchableOpacity>
+                        ))}
+                    </View>
+
                     {categoryDataArray.map((item: any, index: any) => (
                         <TouchableOpacity
                             key={index}
@@ -130,7 +149,7 @@ const styles = StyleSheet.create({
     categoryScreen: {
         flexWrap: 'wrap',
         flex: 1,
-        paddingTop: 70,
+        paddingTop: 50,
         flexDirection: 'row',
         alignItems: 'flex-start',
         justifyContent: 'space-around',
@@ -161,6 +180,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
         width: '100%',
+    },
+
+    budgetCategory: {
+        width: "28%",
+        paddingHorizontal: 25,
+        paddingVertical: 7,
+        margin: 5,
+        fontSize: 15,
+        backgroundColor: "transparent",
+        borderWidth: 1,
+        borderColor: "#846EFD",
+        borderRadius: 20,
+        color: "red",
+        marginBottom: 20
+    },
+    budgetCategorySelected: {
+        backgroundColor: "#846EFD",
+        borderRadius: 20,
+    },
+    categoryText: {
+        textAlign: "center",
+        color: "white",
     },
 
 });

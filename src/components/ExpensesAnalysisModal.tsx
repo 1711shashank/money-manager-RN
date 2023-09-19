@@ -1,18 +1,8 @@
-import React from 'react'
-import { Text } from 'react-native';
-import { View, Modal, StyleSheet } from 'react-native'
-
+import React from 'react';
+import { View, Modal, StyleSheet } from 'react-native';
+import PieChartCard from './PieChartCard';
 
 const ExpensesAnalysisModal = ({ analysisModal, setAnalysisModal }: any) => {
-
-    const data = [
-        ["Need", 30000],
-        ["Want", 15000],
-        ["Invest", 15000],
-
-    ];
-
-
 
     return (
         <>
@@ -24,22 +14,13 @@ const ExpensesAnalysisModal = ({ analysisModal, setAnalysisModal }: any) => {
                     onRequestClose={() => { setAnalysisModal(false) }}
                 >
                     <View style={styles.analysisScreen}>
-                        <View style={styles.modalView}>
-
-
-
-                            <Text>Pie Chart</Text>
-
-
-
-
-                        </View>
+                        <PieChartCard />
                     </View>
                 </Modal>
             </View>
         </>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     analysisScreen: {
@@ -47,37 +28,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-
-
-
-
-    modalView: {
-        margin: 20,
-        backgroundColor: 'white',
-        borderRadius: 20,
-        padding: 35,
-        alignItems: 'center',
-    },
-    button: {
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2,
-    },
-    buttonOpen: {
-        backgroundColor: '#F194FF',
-    },
-    buttonClose: {
-        backgroundColor: '#2196F3',
-    },
-    textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-    modalText: {
-        marginBottom: 15,
-        textAlign: 'center',
-    },
 });
 
-export default ExpensesAnalysisModal
+export default ExpensesAnalysisModal;
