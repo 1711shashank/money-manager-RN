@@ -1,14 +1,18 @@
 import React from 'react';
 import { View, Modal, StyleSheet } from 'react-native';
 import BudgetPieChart from './BudgetPieChart';
-import { calculate_BudgetPieChart, calculate_ExpensesPieChart, generateColors } from './../utility/helperFunction';
+import { calculateTotalExpenses, calculate_BudgetPieChart, calculate_ExpensesPieChart, generateColors } from './../utility/helperFunction';
 import ExpensesPieChart from './ExpensesPieChart';
+import HalfDonutChart from './HalfDonutChart';
 
 const ExpensesAnalysisModal = ({ analysisModal, setAnalysisModal, selectedMonthData }: any) => {
 
+    
+
+
     const budgetPieChart_Data = calculate_BudgetPieChart(selectedMonthData);
     const budgetPieChart_Series = budgetPieChart_Data.map((item: any) => item.amount);
-    const budgetPieChart_Color = generateColors(budgetPieChart_Data.length);;
+    const budgetPieChart_Color = generateColors(budgetPieChart_Data.length);
 
     const expensesPieChart_Data = calculate_ExpensesPieChart(selectedMonthData);
     const expensesPieChart_Series = expensesPieChart_Data.map((item: any) => item.amount);
@@ -25,6 +29,7 @@ const ExpensesAnalysisModal = ({ analysisModal, setAnalysisModal, selectedMonthD
                     onRequestClose={() => { setAnalysisModal(false) }}
                 >
                     <View style={styles.analysisScreen}>
+                        <HalfDonutChart selectedMonthData={selectedMonthData} />
                         <BudgetPieChart sliceColor={budgetPieChart_Color} chartData={budgetPieChart_Data} series={budgetPieChart_Series} />
                         <ExpensesPieChart sliceColor={expensesPieChart_Colors} chartData={expensesPieChart_Data} series={expensesPieChart_Series} />
                     </View>
@@ -37,7 +42,7 @@ const ExpensesAnalysisModal = ({ analysisModal, setAnalysisModal, selectedMonthD
 const styles = StyleSheet.create({
     analysisScreen: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: 'rgba(26, 26, 30, 0.95)'
     },

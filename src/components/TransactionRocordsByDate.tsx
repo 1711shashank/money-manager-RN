@@ -22,7 +22,7 @@ const TransactionRecordsByDate = ({ item }: any) => {
                     </View>
                 </View>
                 {
-                    item.transactionType === 'Income'
+                    categoryData?.transactionType === 'Income'
                         ? <Text style={{ fontSize: 20, color: '#846EFD' }}>{item.amount}</Text>
                         : <Text style={{ fontSize: 18, color: 'white' }}>{item.amount}</Text>
                 }
