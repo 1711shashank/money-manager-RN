@@ -31,7 +31,6 @@ export const calculateTotalExpenses = (transactionData: any) => {
     return { totalIncome, totalExpenses };
 };
 
-
 export const extractMonthsAndYears = (dateArray: any[]) => {
 
     const extractData = dateArray.map((item: any) => new Date(item.date));
@@ -53,6 +52,19 @@ export const extractMonthsAndYears = (dateArray: any[]) => {
     return uniqueMonthsAndYears;
 }
 
+export const sortDataByDate = (data:any) => {
+    data.sort((a:any, b:any) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+
+        if (dateA > dateB) return -1;
+        if (dateA < dateB) return 1;
+        return 0;
+    });
+
+    return data;
+};
+
 export const filterDataByMonth = (transactionData: any, selectedMonth: any) => {
 
     const selectedMonthData = transactionData.filter((item: any) => {
@@ -62,7 +74,10 @@ export const filterDataByMonth = (transactionData: any, selectedMonth: any) => {
 
     })
 
-    return selectedMonthData;
+    const sortedData = sortDataByDate(selectedMonthData);
+
+
+    return sortedData;
 }
 
 export const calculateString = (amountString: string) => {
@@ -87,7 +102,6 @@ export const postDataToBackend = async (newData: Object) => {
     }
 };
 
-
 export const calculate_BudgetPieChart = (selectedMonthData: any) => {
     const initialCartData = [
         { title: 'Need', amount: 0 },
@@ -110,7 +124,6 @@ export const calculate_BudgetPieChart = (selectedMonthData: any) => {
 
     return chartData;
 }
-
 
 export const calculate_ExpensesPieChart = (selectedMonthData: any) => {
 

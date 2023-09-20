@@ -29,7 +29,7 @@ const Home = () => {
 
     useEffect(() => {
         fetchData();
-    }, [categoryModal])
+    }, [categoryModal,selectedMonth])
 
 
     return (

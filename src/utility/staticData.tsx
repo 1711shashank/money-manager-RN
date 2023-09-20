@@ -1,4 +1,4 @@
-import { Ionicons, SimpleLineIcons, Foundation, Feather, MaterialIcons, Entypo, FontAwesome, Octicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, SimpleLineIcons, Foundation, Feather, MaterialIcons, Entypo, FontAwesome, Octicons, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 export const budgetCategoryArray = ["Need", "Want", "Invest"];
@@ -98,6 +98,30 @@ export const categoryDataArray = [
     },
     {
         id: 16,
+        categoryName: 'SIP',
+        transactionType: 'Expenses',
+        icon: <FontAwesome5 name="piggy-bank" size={24} color="lightgray" />
+    },
+    {
+        id: 17,
+        categoryName: 'Stocks',
+        transactionType: 'Expenses',
+        icon: <SimpleLineIcons name="graph" size={24} color="lightgray" />
+    },
+    {
+        id: 18,
+        categoryName: 'Bonds',
+        transactionType: 'Expenses',
+        icon: <Octicons name="note" size={24} color="lightgray" />
+    },
+    {
+        id: 19,
+        categoryName: 'FD/RD',
+        transactionType: 'Expenses',
+        icon: <MaterialCommunityIcons name="bank-outline" size={24} color="lightgray" />
+    },
+    {
+        id: 20,
         categoryName: 'Other',
         transactionType: 'Expenses',
         icon: <Feather name="command" size={24} color="lightgray" />

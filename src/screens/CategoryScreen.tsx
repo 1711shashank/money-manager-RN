@@ -1,4 +1,4 @@
-import { StyleSheet, View, Modal, Keyboard, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Modal, Keyboard, TouchableOpacity, Alert } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import KeyPad from '../components/KeyPad';
@@ -23,8 +23,8 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
 
     useEffect(() => {
         setSelectedCategory(null);
-        setActiveTab('Expenses');
-    }, [categoryModal])
+        setActiveTab('Expenses'); 
+    }, [categoryModal, keypadModal])
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => setTextInputFocused(true));
@@ -54,6 +54,11 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
 
     const handleSubmit = () => {
 
+        if (selectedCategory === null) {
+            Alert.alert("Please select a category");
+            return;
+        }
+
         const newData = {
             date: new Date(moment(date).format('YYYY-MM-DD')),
             data: {
@@ -69,6 +74,7 @@ const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {
         setMessageText('');
         setKeypadModal(false);
         setCategoryModal(false);
+        setDate(new Date());
 
     };
 

@@ -27,7 +27,6 @@ const CategoryIcons = ({ transactionType, selectedCategory, handleCategoryPress 
                 })
             }
         </>
-
     );
 };
 
