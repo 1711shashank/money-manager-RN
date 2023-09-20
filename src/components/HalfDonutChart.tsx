@@ -48,7 +48,7 @@ const HalfDonutChart = ({ selectedMonthData }: any) => {
 const styles = StyleSheet.create({
     cardView: {
         width: '95%',
-        height: '30%',
+        height: '24%',
         backgroundColor: '#2c2c2c',
         borderRadius: 15,
         marginVertical: 10,

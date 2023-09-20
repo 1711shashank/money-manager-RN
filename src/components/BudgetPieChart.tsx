@@ -2,10 +2,15 @@ import React from 'react';
 import { Text } from 'react-native';
 import { View, StyleSheet } from 'react-native';
 import PieChart from 'react-native-pie-chart';
+import { calculate_BudgetPieChart, generateColors } from '../utility/helperFunction';
 
-const widthAndHeight = 120;
 
-const BudgetPieChart = ({ series, chartData, sliceColor }: any) => {
+const BudgetPieChart = ({ selectedMonthData }: any) => {
+
+    const chartData = calculate_BudgetPieChart(selectedMonthData);
+    const series = chartData.map((item: any) => item.amount);
+    const sliceColor = generateColors(chartData.length);
+    const widthAndHeight = 120;
 
     return (
         <>
@@ -70,7 +75,7 @@ const styles = StyleSheet.create({
     },
     chartDataText: {
         color: 'white',
-        fontSize: 15,
+        fontSize: 13,
     },
 });
 
