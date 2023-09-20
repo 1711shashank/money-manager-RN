@@ -1,10 +1,9 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import PieChart from 'react-native-pie-chart';
 import { calculateTotalExpenses, formatAmount } from '../utility/helperFunction';
 
-const widthAndHeight = 285;
 
 const HalfDonutChart = ({ selectedMonthData }: any) => {
 
@@ -13,6 +12,9 @@ const HalfDonutChart = ({ selectedMonthData }: any) => {
     const sliceColor = ['#E87D7D', 'gray', 'transparent'];
     const series = [totalIncome - totalExpenses, totalExpenses, totalIncome];
     const percentage = Math.floor(((totalIncome - totalExpenses) / totalIncome) * 100);
+
+    const screenWidth = Dimensions.get('window').width;
+    const widthAndHeight = 0.65 * screenWidth;
 
     // const series = [500, 500, 1000];
     // const percentage = 1;
@@ -32,8 +34,6 @@ const HalfDonutChart = ({ selectedMonthData }: any) => {
                         coverFill={'transparent'}
                     />
                 </View>
-
-
 
                 <View style={styles.textContainer}>
                     <Text style={{ color: 'lightgray', fontSize: 14 }}> {formatAmount(totalIncome - totalExpenses)} </Text>
@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
     textContainer: {
         flexDirection: 'row',
         position: 'absolute',
-        top: '95%',
+        top: '90%',
         left: 0,
         right: 0, bottom: 0,
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 30,
+        paddingHorizontal: 0.07 * Dimensions.get('window').width,
     },
 });
 

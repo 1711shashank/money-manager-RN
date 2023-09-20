@@ -105,6 +105,9 @@ export const calculate_BudgetPieChart = (selectedMonthData: any) => {
         return acc;
     }, initialCartData);
 
+    const { totalIncome, totalExpenses } = calculateTotalExpenses(selectedMonthData);
+    chartData.push({ title: 'Remining', amount: (totalIncome - totalExpenses) });
+
     return chartData;
 }
 
