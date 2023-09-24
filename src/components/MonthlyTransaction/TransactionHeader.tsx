@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native';
 import ExpensesAnalysisModal from '../Chart/ExpensesAnalysisModal';
 
 
-const TransactionHeader = ({ selectedMonthData, uniqueMonthsAndYears, selectedMonth, setSelectedMonth }: any) => {
+const TransactionHeader = ({ selectedMonthData, uniqueMonthsAndYears, selectedMonth, setSelectedMonth, navigation }: any) => {
 
     const [analysisModal, setAnalysisModal] = useState(false);
 
@@ -15,6 +15,9 @@ const TransactionHeader = ({ selectedMonthData, uniqueMonthsAndYears, selectedMo
             <View style={styles.header}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <View style={styles.headerContentLeft}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                            <MaterialIcons name="menu" size={24} color="white" style={{ marginLeft: 20 }} />
+                        </TouchableOpacity>
                         <Picker
                             selectedValue={selectedMonth}
                             onValueChange={(itemValue) => setSelectedMonth(itemValue)}
