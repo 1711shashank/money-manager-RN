@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { budgetCategoryArray } from '../utility/staticData';
+import { budgetCategoryArray } from '../../utility/staticData';
 
 const BudgetCategoryRow = ({ budgetCategory, setBudgetCategory }: any) => {
 

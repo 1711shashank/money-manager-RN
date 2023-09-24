@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Alert, Platform, Keyboard } from 'react-native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import { calculateString } from '../utility/helperFunction';
+import { calculateString } from '../../utility/helperFunction';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 

@@ -2,21 +2,21 @@ import React from 'react';
 import { Text } from 'react-native';
 import { View, StyleSheet } from 'react-native';
 import PieChart from 'react-native-pie-chart';
-import { calculate_ExpensesPieChart, generateColors } from '../utility/helperFunction';
+import { calculate_BudgetPieChart, generateColors } from '../../utility/helperFunction';
 
 
-const ExpensesPieChart = ({ selectedMonthData }: any) => {
+const BudgetPieChart = ({ selectedMonthData }: any) => {
 
-    const chartData = calculate_ExpensesPieChart(selectedMonthData);
+    const chartData = calculate_BudgetPieChart(selectedMonthData);
     const series = chartData.map((item: any) => item.amount);
     const sliceColor = generateColors(chartData.length);
-    const widthAndHeight = 200;
+    const widthAndHeight = 120;
 
     return (
         <>
             <View style={styles.cardView}>
 
-                <Text style={{ color: 'white', fontSize: 16, textAlign: 'center', marginBottom: 15 }}>Expenses Category</Text>
+                <Text style={{ color: 'white', fontSize: 16, textAlign: 'center', marginBottom: 15 }}>Budget Category</Text>
 
                 <View style={styles.pieChart}>
 
@@ -32,8 +32,9 @@ const ExpensesPieChart = ({ selectedMonthData }: any) => {
                         {chartData.map((item: any, index: any) => (
                             <View key={index} style={styles.chartData}>
                                 <View style={{ backgroundColor: sliceColor[index], width: 10, height: 10, borderRadius: 10, marginRight: 8, }} />
-                                <Text style={styles.chartDataText}> {item.title}: </Text>
-                                <Text style={[styles.chartDataText, { color: 'lightgray' }]}> {item.amount}</Text>
+                                <Text style={styles.chartDataText}>
+                                    {item.title}: {item.amount}
+                                </Text>
                             </View>
                         ))}
                     </View>
@@ -52,26 +53,25 @@ const styles = StyleSheet.create({
         borderRadius: 15,
 
         marginVertical: 10,
+        paddingHorizontal: 35,
         paddingVertical: 15,
     },
     pieChart: {
+        flexDirection: 'row',
         alignItems: 'center',
         margin: 10,
     },
 
+
     chartDataContainer: {
-        width: '100%',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        paddingTop: 30,
+        paddingLeft: 50,
+        alignItems: 'flex-start',
         justifyContent: 'space-between',
     },
     chartData: {
-        width: '48%',
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 8,
-        paddingLeft: 10,
+        marginBottom: 10,
     },
     chartDataText: {
         color: 'white',
@@ -79,4 +79,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ExpensesPieChart;
+export default BudgetPieChart;

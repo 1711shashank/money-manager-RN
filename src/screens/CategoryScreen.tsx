@@ -1,12 +1,12 @@
 import { StyleSheet, View, Modal, Keyboard, TouchableOpacity, Alert } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import KeyPad from '../components/KeyPad';
-import KeyPadInputCard from '../components/KeyPadInputCard';
+import KeyPad from '../components/TransactionForm/KeyPad';
+import KeyPadInputCard from '../components/TransactionForm/KeyPadInputCard';
 import { postDataToBackend } from '../utility/helperFunction';
 import { matrixValues } from '../utility/staticData';
-import BudgetCategoryRow from '../components/BudgetCategoryRow';
-import CategoryIcons from '../components/CategoryIcons';
+import BudgetCategoryRow from '../components/TransactionForm/BudgetCategoryRow';
+import CategoryIcons from '../components/TransactionForm/CategoryIcons';
 import { Text } from 'react-native';
 
 const CategoryScreen = ({ categoryModal, setCategoryModal }: any) => {

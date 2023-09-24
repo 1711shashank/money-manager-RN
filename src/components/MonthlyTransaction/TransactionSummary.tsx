@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { calculateTotalExpenses, formatAmount } from '../utility/helperFunction';
+import { calculateTotalExpenses, formatAmount } from '../../utility/helperFunction';
 
 
 const TransactionSummary = ({ selectedMonthData }: any) => {

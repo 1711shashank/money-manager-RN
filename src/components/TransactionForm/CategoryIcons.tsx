@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { categoryDataArray } from '../utility/staticData';
+import { categoryDataArray } from '../../utility/staticData';
 
 const CategoryIcons = ({ transactionType, selectedCategory, handleCategoryPress }: any) => {
 

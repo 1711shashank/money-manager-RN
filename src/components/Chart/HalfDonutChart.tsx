@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import PieChart from 'react-native-pie-chart';
-import { calculateTotalExpenses, formatAmount } from '../utility/helperFunction';
+import { calculateTotalExpenses, formatAmount } from '../../utility/helperFunction';
 
 
 const HalfDonutChart = ({ selectedMonthData }: any) => {

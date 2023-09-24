@@ -1,9 +1,9 @@
 import React from 'react'
 import { View } from 'react-native'
-import TransactionBody from '../components/TransactionBody'
+import TransactionBody from '../components/MonthlyTransaction/TransactionBody'
 import { filterDataByMonth } from '../utility/helperFunction'
-import TransactionHeader from '../components/TransactionHeader'
-import TransactionSummary from '../components/TransactionSummary'
+import TransactionHeader from '../components/MonthlyTransaction/TransactionHeader'
+import TransactionSummary from '../components/MonthlyTransaction/TransactionSummary'
 
 const TransactionScreen = ({ transactionData, uniqueMonthsAndYears, selectedMonth, setSelectedMonth }: any) => {
 

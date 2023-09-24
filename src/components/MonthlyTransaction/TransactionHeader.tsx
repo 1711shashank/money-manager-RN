@@ -3,7 +3,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Picker } from "@react-native-picker/picker";
 import { StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native';
-import ExpensesAnalysisModal from './ExpensesAnalysisModal';
+import ExpensesAnalysisModal from '../Chart/ExpensesAnalysisModal';
 
 
 const TransactionHeader = ({ selectedMonthData, uniqueMonthsAndYears, selectedMonth, setSelectedMonth }: any) => {
@@ -42,8 +42,6 @@ const TransactionHeader = ({ selectedMonthData, uniqueMonthsAndYears, selectedMo
 };
 
 const styles = StyleSheet.create({
-
-
 
     header: {
         backgroundColor: '#2c2c2c',

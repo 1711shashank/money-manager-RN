@@ -7,8 +7,8 @@ export default function App() {
     return (
         <View style={styles.container}>
             {/* <Home /> */}
-            {/* <CardScreen/> */}
-            <LoginScreen />
+            <CardScreen/>
+            {/* <LoginScreen /> */}
         </View>
     );
 }

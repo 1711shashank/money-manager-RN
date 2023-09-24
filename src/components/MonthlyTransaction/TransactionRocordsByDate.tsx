@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { getCategoryData } from '../utility/helperFunction';
+import { getCategoryData } from '../../utility/helperFunction';
 
 
 const TransactionRecordsByDate = ({ item }: any) => {
