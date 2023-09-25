@@ -5,7 +5,7 @@ import { StyleSheet, Pressable, View } from 'react-native';
 import { extractMonthsAndYears, toString_MonthsAndYear } from './utility/helperFunction';
 import CategoryScreen from './screens/CategoryScreen';
 
-const Home = ({navigation}:any) => {
+const Home = ({ user, signOut }: any) => {
     const [transactionData, setTransactionData] = useState<any[]>([]);
     const [categoryModal, setCategoryModal] = useState(false);
 
@@ -36,7 +36,7 @@ const Home = ({navigation}:any) => {
         <>
             <View style={styles.homeScreen}>
 
-                <TransactionScreen transactionData={transactionData} uniqueMonthsAndYears={uniqueMonthsAndYears} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} navigation={navigation}/>
+                <TransactionScreen transactionData={transactionData} uniqueMonthsAndYears={uniqueMonthsAndYears} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} user={user} signOut={signOut} />
 
                 <Pressable onPress={() => setCategoryModal(true)} style={styles.addIconContainer}>
                     <AntDesign name="pluscircle" size={60} color="#846EFD" style={styles.addIcon} />

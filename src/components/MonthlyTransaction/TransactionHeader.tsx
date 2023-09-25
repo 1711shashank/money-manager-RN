@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Picker } from "@react-native-picker/picker";
-import { StyleSheet, View } from 'react-native';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import ExpensesAnalysisModal from '../Chart/ExpensesAnalysisModal';
+import ProfileScreen from '../../screens/ProfileScreen';
 
 
-const TransactionHeader = ({ selectedMonthData, uniqueMonthsAndYears, selectedMonth, setSelectedMonth, navigation }: any) => {
+const TransactionHeader = ({ selectedMonthData, uniqueMonthsAndYears, selectedMonth, setSelectedMonth, user, signOut }: any) => {
 
+    const [profileModal, setProfileModal] = useState(false);
     const [analysisModal, setAnalysisModal] = useState(false);
 
     return (
@@ -15,7 +16,7 @@ const TransactionHeader = ({ selectedMonthData, uniqueMonthsAndYears, selectedMo
             <View style={styles.header}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <View style={styles.headerContentLeft}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                        <TouchableOpacity onPress={() => setProfileModal(true)} >
                             <MaterialIcons name="menu" size={24} color="white" style={{ marginLeft: 20 }} />
                         </TouchableOpacity>
                         <Picker
@@ -36,6 +37,7 @@ const TransactionHeader = ({ selectedMonthData, uniqueMonthsAndYears, selectedMo
                     </TouchableOpacity>
                 </View>
 
+                <ProfileScreen profileModal={profileModal} setProfileModal={setProfileModal} user={user} signOut={signOut} />
                 <ExpensesAnalysisModal analysisModal={analysisModal} setAnalysisModal={setAnalysisModal} selectedMonthData={selectedMonthData} />
 
             </View>

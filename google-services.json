@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "293357260144",
+    "project_id": "moneymanager-9e0a8",
+    "storage_bucket": "moneymanager-9e0a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293357260144:android:732f1f5f83374b5b7253b5",
+        "android_client_info": {
+          "package_name": "com.shashank.moneymanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "293357260144-5ke8p491job5n579f878dj5h96as2gad.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shashank.moneymanager",
+            "certificate_hash": "8fbde64519b4282461f2600256bb8b3196eaf427"
+          }
+        },
+        {
+          "client_id": "293357260144-jmr6mv8u9417gd92h6d8jtr95vcst5pa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shashank.moneymanager",
+            "certificate_hash": "1b8a43d5fcc8296b0ce46dd92f48dacb42addd86"
+          }
+        },
+        {
+          "client_id": "293357260144-oeuoul1beohic83lmo2imhmbg77a0ehs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDknIl43A8YgvEfc5gzXi6b5lqXUnNeMgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "293357260144-oeuoul1beohic83lmo2imhmbg77a0ehs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

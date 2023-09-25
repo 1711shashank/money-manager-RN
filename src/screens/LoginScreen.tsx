@@ -1,19 +1,12 @@
 import React from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 
-const LoginScreen = () => {
-
-    const handleLogin = () => {
-        console.log('LoginScreen');
-
-    }
-
-
+const LoginScreen = ({ handleLogin }: any) => {
 
     return (
         <>
-        
-            <View style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center', }}>
+
+            <View style={{ width: '100%', height: '100%', alignItems: 'center', backgroundColor: '#1A1A1A', justifyContent: 'center', }}>
                 <Text style={{ color: 'white', fontSize: 30 }}>Money Manager</Text>
                 <View style={{ width: '90%', aspectRatio: 1, marginVertical: 80 }}>
                     <Image
