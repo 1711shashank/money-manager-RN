@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity, Modal } from 'react-native';
-import { Ionicons, Entypo } from '@expo/vector-icons';
+import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 
 
 
@@ -8,15 +8,22 @@ const ProfileScreen = ({ profileModal, setProfileModal, user, signOut }: any) =>
     return (
         <>
             <Modal
-                animationType="slide"
+                // animationType="slide"
                 transparent={true}
                 visible={profileModal}
                 onRequestClose={() => { setProfileModal(false) }}
             >
 
-                <View style={{ height: '100%', width: '100%', flex: 1, backgroundColor: '#1A1A1A', paddingLeft: 15 }}>
+                <View style={{ height: '100%', width: '100%', flex: 1, backgroundColor: '#1A1A1A' }}>
 
-                    <View style={{ paddingTop: 50, paddingLeft: 20, flexDirection: 'row', width: '100%', alignItems: 'center', marginBottom: 40 }}>
+                    <View style={{ backgroundColor: '#2c2c2c', paddingVertical: 15, flexDirection: 'row', alignItems: 'center' }}>
+                        <TouchableOpacity onPress={() => setProfileModal(false)} >
+                            <Ionicons name="arrow-back-sharp" size={24} color="white" style={{ marginLeft: 20, paddingTop: 4 }} />
+                        </TouchableOpacity>
+                        <Text style={{ color: 'white', fontSize: 20, marginLeft: 10 }}> Profile</Text>
+                    </View>
+
+                    <View style={{ paddingTop: 30, paddingLeft: 20, flexDirection: 'row', width: '100%', alignItems: 'center', marginBottom: 40 }}>
                         <Image style={{ width: 70, height: 70, borderRadius: 75, marginRight: 15 }} source={{ uri: user.photoURL }} />
                         <View>
                             <Text style={{ color: 'white', fontSize: 20 }}> {user.displayName}</Text>

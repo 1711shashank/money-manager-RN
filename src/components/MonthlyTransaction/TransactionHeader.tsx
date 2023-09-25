@@ -8,7 +8,7 @@ import ProfileScreen from '../../screens/ProfileScreen';
 
 const TransactionHeader = ({ selectedMonthData, uniqueMonthsAndYears, selectedMonth, setSelectedMonth, user, signOut }: any) => {
 
-    const [profileModal, setProfileModal] = useState(false);
+    const [profileModal, setProfileModal] = useState(true);
     const [analysisModal, setAnalysisModal] = useState(false);
 
     return (
